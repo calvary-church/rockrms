@@ -1,0 +1,330 @@
+section {
+	&.events{
+	  .event{
+		  img {
+			  width: 100%;
+			  height: auto;
+		  }
+	    &__item{
+	      background: @white;
+	      padding: 25px 35px 30px;
+	    }
+	    &__title{
+	      .font(28,bold);
+	      margin:0;
+	      a {
+		      color: @color-black;
+		      &:hover {
+			      color: @brand-primary;
+		      }
+	      }
+	    }
+	    &__meta{
+	      margin: 5px 0 0;
+	      padding: 0;
+	      list-style: none;
+	      li{
+		      display: inline;
+	        &:before {
+		        content:"|";
+		        margin: 0 10px;
+	        }
+	        &:first-child:before {
+		        content:none;
+		        margin:0;
+	        }
+	      }
+	    }
+	    &__date{
+		    
+	    }
+	    &__time{
+	      
+	    }
+	  }
+	  &.featured {
+		  .block-grid-item {
+			  background-color: @white;
+		  }
+		  .content-section{
+		    &_inner{
+		      
+		    }
+		    &__text{
+			    h2:first-of-type {
+				    margin: 0 0 30px;
+			    }
+		    }
+		  }
+		  .event {
+			  &__image {
+				  img {
+					  width: 100%;
+					  max-width: 100%;
+					  height: auto;					  
+				  }
+			  }
+			  &__item {
+				  margin:0;
+				  padding: 25 30px;
+				  border: none;
+			  }
+			  &__category {
+				  .font(14);
+				  color: @color-gray-light;
+			  }
+			  &__title {
+				  color: @color-blue;
+			  }
+		  }
+	  }
+	}// end .events{
+}
+.events_list {
+	&--title {
+		color: @text-color;
+		margin:0;
+	}
+    .day_group_row-separator {
+      border-top: solid 6px @text-color;
+      padding-bottom: 1em;
+      margin: 1em 0;
+    }
+    .event {
+    border-top: solid 2px @color-gray;
+    margin: 1em 0;
+    padding-top: 1em;
+		@media (min-width: @screen-sm) {
+			display: flex;
+	    flex-direction: row;
+	    flex-wrap: nowrap;
+	    justify-content: space-between;
+	    align-content: stretch;
+	    align-items: flex-start;
+		}
+		&:first-child{
+			border:none;
+			margin-top:0;
+			padding-top:0;
+		}
+		.button {
+			margin:10px 0;
+			@media (min-width: @screen-sm) {
+				margin: 3px 0;
+			}
+		}
+    }
+    .event_start_date {
+        text-transform: uppercase;
+        color: @text-color;
+				font-size: 16px;
+				letter-spacing: 2.8px;
+				line-height: 22px;
+        span {
+          color: @text-color;
+          display: block;
+          font-weight:bold;
+          line-height: 1.4;
+          letter-spacing: 0;
+          text-transform: none;
+          white-space: nowrap;
+          font-size: 36px;
+          @media (min-width: @screen-md) {
+          	font-size: 26px;
+          }
+          @media (min-width: @screen-lg) {
+          	font-size: 36px;
+          }
+        }
+    }
+    .event_info {
+        margin:0;
+        font-weight: normal;
+        text-transform: none;
+        letter-spacing: 1px;
+        color: @text-color;
+        small {
+            font-size: 16px;
+        }
+    }
+    .event-title {
+        margin:0;
+        font-size: 32px;
+        font-weight: bold;
+        text-transform: none;
+        letter-spacing: 1px;
+        a {
+            color: @text-color;
+            text-decoration: none;
+        }
+    }
+}
+#event-detail {
+	.event-image {
+		margin-bottom: 20px;
+	}
+	.event-info {
+		@media (min-width: @screen-sm) {
+			display: grid;
+			grid-gap: 20px;
+			grid-template-columns: 1fr 1fr;
+		}
+		
+		@media (min-width: @screen-md) {
+			display: block;
+		}
+		&__link {
+  		.font(16);
+	    color: @color-black;
+	    text-decoration: none;
+	    border-bottom: solid 2px @color-blue;
+	    &:hover {
+		    color: @color-blue;
+	    }
+	  }
+		&__contact {
+			padding: 28px 32px;
+			background-color: @truewhite;
+			p {
+				.font(16);
+				margin: 0 0 10px;
+				strong {
+					.font(20,bold);
+					text-transform: uppercase;
+					display: block;
+				}
+			}
+		}
+	}
+	.event__title {
+		.font(36,bold);
+		line-height: 48px;
+		margin:0;
+	}
+  .event__meta{
+		.font(20,bold);
+    margin: 5px 0;
+    padding: 0;
+    list-style: none;
+    li{
+      display: inline;
+      &:before {
+        content:"|";
+        margin: 0 10px;
+      }
+      &:first-child:before {
+        content:none;
+        margin:0;
+      }
+    }
+  }
+	.event-info {
+		&__description {
+			margin: 30px 0;
+			:first-child {
+				.font(20);
+			}
+		}
+	}
+	.event-registration {
+		&__title {
+			margin: 2em 0 1em;
+		}
+		&__links {
+			.font(16,bold);
+			margin:10px 0 10px;
+			padding:0 0 10px;
+			list-style-type: none;
+			display: flex;
+			justify-content: space-between;
+			border-bottom: solid 3px @color-gray-light;
+			.point-right {
+				.cc-icon {
+					transform: rotate(-90deg);
+			    font-size: 12px;
+			    vertical-align: baseline;
+			    margin-left: 5px;
+				}	
+			}
+		}
+	}
+  .addthis_toolbox{
+    margin-top: 20px;
+    ul{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      li{
+        padding-right: 15px;
+        display: inline-block;
+        a{
+          display: block;
+          span {
+            margin-top: -1px;
+    					&.fa-facebook:before {
+    				    content: "\f09a";
+    					}
+    				}
+        }
+      }
+    }
+    .fab, .cc-icon{
+      border-radius: 0;
+      color: @color-gray-dark;
+      .font(26);
+    } 
+  }// end .share
+}
+.socialsharing {
+  padding: 0;
+  margin-top: 12px;
+  li {
+    display: inline-block;
+    .socialicon {
+      padding:0;
+      color: @text-color;
+      border-radius: 0;
+      background:none;
+      &:hover {
+        text-decoration: none;
+	      color: @color-gray-dark;
+      }
+      .icon {
+	      border-radius: 0;
+      }
+	    &.socialicon-facebook {
+	    }
+	    &.socialicon-twitter {
+	    }
+	    &.socialicon-email {
+	    }
+	    &.socialicon-calendar {
+	    }
+    }
+  }
+}
+.custom-events-list {
+	@media (min-width: @screen-md) {
+		display: flex;
+	}
+	> div {
+		margin: 0 15px;
+	}
+	.events-list {
+		flex-grow: 1;
+	}
+	.calendar-month {
+		.calendar-today,
+	  .calendar-selecteditem {
+	    color: @text-color !important;
+	    background-color: fade(@brand-primary,40%) !important;
+	  }
+	  .calendar-selected {
+	    color: @white !important;
+	    background-color: @brand-primary !important;
+	    a {
+	      color: @white !important;
+	    }
+	  }
+	}	
+}

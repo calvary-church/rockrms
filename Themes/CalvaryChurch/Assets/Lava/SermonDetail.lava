@@ -1,0 +1,61 @@
+﻿{% assign message = Item %}
+
+	{% assign wVI = message | Attribute:'WistiaVideo','RawValue' %}
+	{% assign wVE = message | Attribute:'WistiaVideo' %}
+	{% assign vVI = message | Attribute:'VimeoID' %}
+	{% assign videoEmbed = message | Attribute:'VideoEmbed' %}
+	{% assign audioLink = message | Attribute:'AudioFile','RawValue' %}
+
+	{% assign messageWeek = message.ParentItems | First %}
+  {% assign bulletinLink = messageWeek.ContentChannelItem | Attribute:'SmallGroupQuestions','RawValue' %}
+  {% assign podcastEpisode = messageWeek.ContentChannelItem | Attribute:'PodcastEpisode','RawValue' %}
+	{% assign seriesItem = messageWeek.ContentChannelItem.ParentItems | First %}
+	{% assign series = seriesItem.ContentChannelItem %}
+	{% assign seriesTitle = series.Title %}
+	{% assign seriesImage = series | Attribute:'SeriesImage' %}
+	{% assign seriesSummary = series | Attribute:'Summary' %}
+
+	{% assign speakerObject = message | Attribute:'Speaker','Object' %}
+	{% assign speakerTitle = speakerObject | Attribute:'Title' %}
+	
+	<div class="latest-sermon">
+    <div class="grid-container">
+		  <div class="sermon-video">
+			  	{% if wVI and wVI != '' %}
+				    {{ wVE }}
+				{% elseif vVI and vVI != '' %}
+				    {[ vimeo id:'{{ vVI }}' ]}
+				{% elseif videoEmbed and videoEmbed != '' %}
+	      <div class="embed-responsive embed-responsive-16by9">
+	          <video width="800" height="450" >
+		          <source src="{{ videoEmbed }}" type="video/mp4">
+	          </video>
+	      </div>
+	      {% else %}
+		      {{ seriesImage }}
+				{% endif %}
+	    </div>
+      <div class="sermon-details">
+        <div class="sermon__date">{{ message.StartDateTime | Date:'MMMM d, yyyy' }}</div>
+		    <div class="sermon-info">
+	        <div class="series__title">{{ seriesTitle }}{% if messageWeek != '' %} | {{ messageWeek.ContentChannelItem.Title }}{% endif %}</div>
+          <div class="sermon__title">{{ message.Title }}</div>
+          <div class="sermon__speaker">{{ message | Attribute:'Speaker' }}{% if speakerTitle != '' %}, {{ speakerTitle }}{% endif %}</div>
+        </div>
+		    <div class="sermon-media">
+		      <ul>
+		        {% if audioLink != '' %}
+						<li><a href="{{ audioLink }}" target="_blank"><svg class="cc-icon cc-icon-listen"><use xlink:href="#cc-icon-listen"></use></svg>Sermon Audio</a></li>
+		        {% endif %}
+		        {% if bulletinLink != '' %}
+		        <li><a href="/GetFile.ashx?guid={{ bulletinLink }}" target="_blank" title="Small Group Questions for {{ message.StartDateTime | Date:'MMM d, yyyy' }}"><svg class="cc-icon cc-icon-study_guide"><use xlink:href="#cc-icon-study_guide"></use></svg>Study Guide</a></li>
+		        {% endif %}
+		        <li><a class="addthis_button_compact"><span><svg class="cc-icon cc-icon-share"><use xlink:href="#cc-icon-share"></use></svg>Share</span></a></li>
+		        {% if podcastEpisode != '' %}
+						<li><a href="{{ podcastEpisode }}" target="_blank"><svg class="cc-icon cc-icon-listen"><use xlink:href="#cc-icon-listen"></use></svg>Podcast Episode</a></li>
+		        {% endif %}
+		      </ul>
+		    </div>		            
+			</div>
+    </div>
+	</div>

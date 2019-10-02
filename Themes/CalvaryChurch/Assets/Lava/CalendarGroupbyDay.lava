@@ -1,0 +1,73 @@
+<div class="events_list">
+<h2 class="events_list--title">All Events {{TimeFrame}} {{StartDate | Date:'MMM d'}}</h2>
+
+{% assign eventItemOccurrenceCount = EventItemOccurrences | Size %}
+{% assign current_start_day = null %}
+
+  {% if eventItemOccurrenceCount == 0 %}
+  <div class="panel panel-default margin-t-md">
+    <div class="margin-all-md"> There are no events in this time frame.</div>
+  </div>
+
+  {% else %}
+  
+	<div class='hide'>
+		<div class='hide'>
+			<div class="hide">
+  {% for eventItemOccurrence in EventItemOccurrences %}
+	{% if eventItemOccurrence.Date != current_start_day %}
+			</div>
+		</div>
+	</div>
+	<div class='day_group_row'>
+		<div class='row'>
+			<div class="col-sm-12">
+				<hr class="day_group_row-separator" />
+			</div>
+		</div>
+		<div class="row">
+			<div class='event_start_date col-sm-3 col-md-2'>
+				<p>{{ eventItemOccurrence.Date  | Date: 'ddd' }}
+					<span>{{ eventItemOccurrence.Date  | Date: 'MMM d' }}</span>
+        </p>
+			</div>
+			<div class='day_event_list col-sm-9 col-md-10'>
+	    {% endif %}
+			<div class='event'>
+				<div>
+	        <h2 class="event-title">
+					{% if eventItemOccurrence.DetailPage != null %}
+					<a href="{{ eventItemOccurrence.DetailPage }}">
+					{% else %}
+					<a href="{{ DetailsPage }}?EventOccurrenceId={{ eventItemOccurrence.EventItemOccurrence.Id }}">
+					{% endif %}
+					{{ eventItemOccurrence.Name }}
+					</a></h2>
+					<p class='event_info'>
+						<small class='event_time'>{{ eventItemOccurrence.Time}}
+						{% if eventItemOccurrence.EventItemOccurrence.Schedule.EffectiveStartDate != eventItemOccurrence.EventItemOccurrence.Schedule.EffectiveEndDate %}
+							&bull; 
+							{{ eventItemOccurrence.EventItemOccurrence.Schedule.EffectiveStartDate  | Date: 'MMM d' }}
+		                     - 
+							{{ eventItemOccurrence.EventItemOccurrence.Schedule.EffectiveEndDate  | Date: 'MMM d' }}
+		                {% endif %}
+						{% if eventItemOccurrence.Location != null %}
+						&bull; {{ eventItemOccurrence.Location}}
+						{% endif %}
+		            </small></p>
+						</div>
+				{% if eventItemOccurrence.DetailPage != null %}
+				<a class="button button--primary" href="{{ eventItemOccurrence.DetailPage }}">Details</a>
+				{% else %}
+				<a class="button button--primary" href="{{ DetailsPage }}?EventOccurrenceId={{ eventItemOccurrence.EventItemOccurrence.Id }}">Details</a>
+				{% endif %}
+
+				{% assign current_start_day = eventItemOccurrence.Date %}
+				{% assign current_end_day = eventItemOccurrence.EventItemOccurrence.Schedule.EffectiveEndDate %}
+				</div>
+				{% endfor %}
+					</div>
+				</div>
+			</div>
+	{% endif %}
+</div>

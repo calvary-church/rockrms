@@ -1,0 +1,10 @@
+<ul class="list-inline text-center">
+   {% for item in Items %}
+   {% assign LinkClass = item | Attribute:'LinkClass' %}
+  <li><a class="{{ item.Title | 'ToCssClass' }}-link hint" href="{{item | Attribute:'UrlLink', 'RawValue' }}" data-tooltipster='{"side":"bottom","animation":"fade"}' title="{{item | Attribute:'ButtonLabel'}}"><span class="{{ LinkClass }}"></span><span class="hidden-md hidden-lg">{{ item.Title }}</span></a></li>
+  
+  {% endfor %}
+</ul>
+          
+          
+

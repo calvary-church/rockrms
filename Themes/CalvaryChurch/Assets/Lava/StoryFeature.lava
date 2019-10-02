@@ -1,0 +1,37 @@
+{% assign pagenumber = 'Global' |  PageParameter:Page %}
+
+{% for item in Items %}
+{% assign latestBlog = Items | First %}
+{% assign Author = item | Attribute:'Author' %}  
+{% assign VimeoId = item | Attribute: 'VimeoId' %}
+{% assign PostDate = item.StartDateTime | Date: 'MMM d, yyyy' %}
+{% assign Category = item | Attribute: 'Category' %}
+{% assign ImageGuid = item | Attribute:'Image','RawValue' %}
+
+  {% if forloop.first and Pagination.CurrentPage == 1 %}
+    <div class="row latest blog-item row-eq-height-md">
+      <div class="col-sm-12 col-md-7 blog-item__info nopad">
+        {% if VimeoId != "" %}
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/{{ VimeoId }}?title=0&byline=0&portrait=0" js-player-fullscreen no-playbar with-sticky-custom-logo player-sm player-cardsCorner webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        </div>
+        {% else %}
+        <img alt="{{ item.Title }}" class="img-responsive" src="/GetImage.ashx?Guid={{ ImageGuid }}" />
+        {% endif %}
+      </div><!-- end blog-item__info -->
+      
+      <div class="col-sm-12 col-md-5 blog-item__content nopad">
+        <div class="content-wrapper">
+           <div class="blog-item__title">{{ item.Title }}</div>
+           <div class="blog-item__date">{% if Category != ''%}{{ Category }}{% endif %}{% if Category && Postdate != '' %}&nbsp;&nbsp;|&nbsp;&nbsp;{% endif %}{% if PostDate != ''%}  {{ PostDate }}{% endif %}</div>
+          {% if item.Content != '' %}
+            {{ item.Content | TruncateWords:15 ,'...' }}
+            <p><a href="/grow/stories/{{item.PrimarySlug}}" class="button button--primary">Read</a></p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  
+  {% endif %}
+{% endfor %}
+

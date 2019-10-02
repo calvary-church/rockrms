@@ -1,0 +1,26 @@
+
+{% assign Author = Item | Attribute:'Author' %} 
+
+  <div class="row blog-item">
+    <div class="col-md-6 blog-item__info">
+      <div class="blog-item__title">{{ Item.Title }}</div>
+      <div class="blog-item__date">{{ Item.StartDateTime | Date: 'MMM d, yyyy ' }} | {{ Author }}</div>
+      <div class="blog-item__content">
+    {{ Item.Content }} 
+    </div>
+
+    </div>
+    <div class="col-md-3 col-md-offset-2 blog-item__share">
+      <div class="addthis_toolbox">
+        <ul class="custom_images">
+          <li><a class="addthis_button_facebook"><span class="icon icon-facebook"></span></a></li>
+          <li><a class="addthis_button_twitter"><span class="icon icon-twitter"></span></a></li>
+          <li><a class="addthis_button_email"><span class="icon icon-email"></span></a></li>
+          <li><a class="addthis_button_more"><span class="icon icon-plus"></span></a></li> 
+
+        </ul>
+      </div>
+      
+    </div>
+  </div>
+  

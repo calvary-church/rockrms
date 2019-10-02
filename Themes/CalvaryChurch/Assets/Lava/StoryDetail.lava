@@ -1,0 +1,29 @@
+{% assign Author = Item | Attribute:'Author' %}  
+{% assign VimeoId = Item | Attribute: 'VimeoId' %}
+{% assign PostDate = Item.StartDateTime | Date: 'MMM d, yyyy' %}
+{% assign Category = Item | Attribute: 'Category' %}
+{% assign ImageGuid = Item | Attribute:'Image','RawValue' %}
+
+  <div class="row blog-item">
+    <div class="col-sm-12 blog-item__info">
+      <div class="blog-item__title">{{ Item.Title }}</div>
+      <div class="blog-item__date">{% if Category != ''%}{{ Category }}{% endif %}{% if Category && Postdate != '' %}&nbsp;&nbsp;|&nbsp;&nbsp;{% endif %}{% if PostDate != ''%}{{ PostDate }}{% endif %}</div>     
+     <div class="blog-item__content">
+        {% if VimeoId != "" %}
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe src="https://player.vimeo.com/video/{{ VimeoId }}?title=0&byline=0&portrait=0" width="640" height="360" js-player-fullscreen no-playbar with-sticky-custom-logo player-sm player-cardsCorner webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        </div>
+        {% else %}
+        <div class="embed-responsive embed-responsive-16by9">
+	        <img alt="{{ Item.Title }}" class="img-responsive" src="/GetImage.ashx?Guid={{ ImageGuid }}" />
+        </div>
+        {% endif %}
+        {{ Item.Content }} 
+    </div>
+    </div>
+  </div>
+  <div class="row text-left">
+    <div class="col-sm-12">
+      <a href="/grow/stories" class="button button--primary">Back to all stories</a>
+    </div>
+  </div>

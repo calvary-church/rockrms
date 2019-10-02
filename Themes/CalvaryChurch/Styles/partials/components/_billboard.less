@@ -1,0 +1,161 @@
+.billboard {
+  position: relative;
+  max-height: 600px;
+  overflow: hidden;
+  .page__title{
+    position: absolute;
+    bottom:10%;
+    z-index: 9;
+    width: 100%;
+    h1{
+      .font-phone-heading-1-white();
+      padding: 0 30px;
+      @media (min-width: @screen-sm) {
+        .font-desktop-heading-1-white();
+        padding: 0 15px;
+      }
+    }
+  }
+  .item{
+    background-size: cover;
+		background-position: center top;
+		background-repeat: no-repeat;
+		min-height: 0;
+    max-height: 100%;
+  }
+  .homepage & {
+    max-height: inherit;
+    .item{
+      height: 100vh;
+      max-height: 100vh;
+      min-height: 568px;
+      @media (min-width: @screen-sm) {
+      		min-height: 768px;
+      }
+      .content {
+		    display: flex;
+		    flex-direction: row;
+		    flex-wrap: nowrap;
+		    justify-content: flex-start;
+		    align-content: center;
+		    align-items: center;
+//		    position: relative;
+		    height: 100%;
+	      .font-phone-hero-body-white();
+	      @media (min-width: @screen-sm) {
+	        .font-desktop-hero-body-white();      
+	      }
+	      .page__title {
+		      position: relative;
+		      bottom: auto;
+		      margin: 80px auto 0;
+		      width: 80%;
+		      @media (min-width: @screen-sm) {
+	      		margin: 100px auto 0;
+	      		width: auto;
+		      }
+		      &-caption:before {
+			      content:"";
+						width: 35%;
+						border-top: 10px solid @brand-primary; 
+						display: block;
+						margin-bottom: 20px;
+						@media (min-width: @screen-sm) {
+							margin-bottom: 31px;
+						}
+		      }
+		      h1 {
+			      .font-phone-hero-title-white();
+			      margin-bottom: 0;
+			      padding:0;
+			      @media (min-width: @screen-sm) {
+			        .font-desktop-hero-title-white();      
+			      }
+		      }
+		      p {
+			      margin:0.5em 0 2em;
+		      }
+		      .button {
+			      margin: 0;
+		      }
+	      }
+      }
+      &.overlay {
+	      &:after {
+				  opacity: 0.8;
+					/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1e5799+0,181818+0,1b1b1b+55,181818+100&0.9+0,0.8+55,0.9+100 */
+					background: -moz-linear-gradient(top, rgba(24,24,24,0.9) 0%, rgba(27,27,27,0.8) 55%, rgba(24,24,24,0.9) 100%); /* FF3.6-15 */
+					background: -webkit-linear-gradient(top, rgba(24,24,24,0.9) 0%,rgba(27,27,27,0.8) 55%,rgba(24,24,24,0.9) 100%); /* Chrome10-25,Safari5.1-6 */
+					background: linear-gradient(to bottom, rgba(24,24,24,0.9) 0%,rgba(27,27,27,0.8) 55%,rgba(24,24,24,0.9) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+					filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6181818', endColorstr='#e6181818',GradientType=0 ); /* IE6-9 */
+	      }
+      }
+    }
+  }
+}
+.noheader{
+  #billboard{
+   background-color: @brand-primary;
+	 	.container{
+      margin-top: 70px;
+      @media (min-width: @screen-lg) {
+      	margin-top: 90px;
+      }
+      @media (min-width: @screen-xl) {
+      	margin-top: 100px;
+      }
+      h1{
+        color: @white;
+        margin: 28px 0;
+      }
+    }
+  }
+}
+#bgvideo {
+  #background-video,
+  video {
+	  overflow:hidden;
+	  object-fit: cover;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+}
+
+/* Declare heights because of positioning of img element */
+.billboard{
+  .item {
+    height: 440px;
+    background-color: #777;
+    position: relative;
+    @media (min-width: @screen-sm) {
+//       height: auto;
+      height: 600px;
+      max-height: 600px;
+    }
+    .content {
+      position: absolute;
+	    width: 100%;
+	    bottom: 0;
+	    top: 0;
+	    z-index: 2;
+		}
+  }
+  &-inner > .item > picture > img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  &-inner > .item  {
+	  &.compat-object-fit {
+			background-size: cover;
+			background-position: center center;
+			picture { // hide image if object fit is not supported - opacity to 0 for the link area
+				opacity: 0;
+			}
+		}
+	}
+}

@@ -1,0 +1,32 @@
+		        <div class="block-grid-xs-1 block-grid-sm-2 block-grid-md-3">
+          {% for group in Groups %}
+	{%- assign colPos = forloop.index0 | Modulo:3 | Plus:1 -%}
+	{%- assign rowPos = forloop.index | DividedBy:3 | Ceiling -%}
+
+	<div class='block-grid-item' style="-ms-grid-row:{{rowPos}};-ms-grid-column:{{colPos}};">
+		          {% if group.PhotoId %}
+		            <div class="group__image">
+		              <img src="/GetImage.ashx?id={{ occurrence.EventItem.PhotoId }}&width=480&height=370&mode=crop&anchor=middlecenter" alt="{{ occurrence.EventItem.Name }}" width="480" height="370" />
+		            </div>
+		          {% endif %}
+	              <div class="group__item">
+		              <div class="group__category">
+			              {{group | Attribute:'Category'}}
+		              </div>
+	                <div class="group__title">{{ group.Name }}</div> 
+	                <ul class="group__meta">
+	                  <li class="group__date"><span class="icon icon-calendar"></span> {{ group.Schedule.Name }}</li>
+	                  <li class="group__time"><span class="icon icon-time"></span> {{ group.Schedule.FriendlyScheduleText }}</li>
+	                </ul>
+	                <p>{{group.Description | StripHtml | TruncateWords:50 }}</p>
+	            {% if LinkedPages.GroupDetailPage != '' %}
+	              <a class="btn btn--secondary --medium" href="{{ LinkedPages.GroupDetailPage }}?GroupId={{ group.Id }}">Details</a>
+	            {% endif %}
+	            {% if LinkedPages.RegisterPage != '' %}
+	              <a class="btn btn--primary --medium" href="{{ LinkedPages.RegisterPage }}?GroupId={{ group.Id }}">Register</a>          
+	            {% endif %}
+	        
+	              </div>
+	            </div>
+          {% endfor %}
+		        </div>

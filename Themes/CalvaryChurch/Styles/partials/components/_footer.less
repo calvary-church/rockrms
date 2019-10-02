@@ -1,0 +1,192 @@
+footer{
+  margin-bottom: 0;
+  #zone-footer {
+	  float: none;
+	  padding: 30px 40px;
+	  @media (min-width: @screen-sm) {
+	  		padding: 30px 24px 40px;
+	  }
+	  @media (min-width: @screen-lg) {
+	    padding: 50px 9.52381vw 35px;
+	  }
+	  @media (min-width: @screen-xl) {
+	    padding: 60px 9.52381vw 40px;
+	  }
+	  .zone-content {
+			> :first-child { grid-area: Logo; }
+		  @media (min-width: @screen-sm) {
+			  display: grid;
+			  grid-template-columns: 1fr 1fr 1fr 1fr;
+			  grid-template-rows: auto 1fr;
+			  grid-template-areas: "Logo Logo Logo Logo" ". . . .";
+			  grid-gap: 20px;				
+			}
+		  @media (min-width: @screen-md) {
+			  display: flex;
+		    flex-direction: row;
+		    flex-wrap: nowrap;
+		    justify-content: space-between;
+		    align-content: stretch;
+		    align-items: flex-start;
+		  }
+	  }
+  }
+  #zone-footerattributes{
+	  background-color: @gray-darker;
+	  float: none;
+	  padding: 18px;
+	  @media (min-width: @screen-sm) {
+	    padding: 20px 120px;
+	  }
+	  @media (min-width: @screen-xl) {
+	    padding: 20px 170px;
+	  }
+	  .zone-content {
+		  @media (min-width: @screen-sm) {
+			  display: flex;
+		    flex-direction: row;
+		    flex-wrap: nowrap;
+		    justify-content: space-between;
+		    align-content: stretch;
+		    align-items: flex-start;
+		  }
+	  }
+	  .attribution,
+	  .copyright{
+		  color: @white;
+		  margin: 0;
+		  padding: 0;
+		  font-size:10px;
+		  p {
+			  line-height: 2;
+			  margin:0;
+		  }
+		  a{
+		    color: @white;
+		    text-decoration: none;
+		    border-bottom: solid 1px @brand-primary;
+		  }
+		}
+  }
+}
+.footer{
+  background: @color-black;
+  .panel.panel-block {
+	  background:none;
+	  color: @white;
+	  margin: 0 30px 21px;
+	  @media (min-width: @screen-sm) {
+	  		margin: 0;
+	  }
+	  >.panel-heading, 
+	  >.rock-panel-drawer {
+		  padding:0;
+		  display: block;
+		  background: none;
+			border:none;
+		  .panel-title {
+				color: @white;
+				font-size: 14px;
+				font-weight: bold;
+				letter-spacing: 1px;
+				line-height: 22px;
+				text-transform: uppercase;
+				margin-bottom: 7px;
+		  }
+	  }
+		>.panel-body {
+		  background:none;
+		  p {
+			padding:0;
+			font-size: 14px;
+			line-height: 26px;
+			margin-bottom: 1em;
+			@media (min-width: @screen-sm) {
+				margin-bottom: 0;
+			}
+		  }
+		  a {
+			  color: @white;
+			  text-decoration: none;
+			  border-bottom: solid 1px @brand-primary;
+		  }
+		}
+		.list-group-item {
+			padding:0;
+			font-size: 14px;
+			line-height: 26px;
+			border:none;
+			@media (min-width: @screen-sm) {
+
+			}
+			a {
+				color: @white;
+			  text-decoration: none;
+			  border-bottom: solid 1px @brand-primary;
+			  &:hover {
+				  border-bottom: solid 1px @brand-secondary;			  
+			  }
+			}
+		}
+	}
+	#social-media-links {
+		text-align: left;
+		.panel-heading {
+			display: none;
+		}
+		.list-group-item {
+			display: inline-block;
+			margin: 0 15px 0 0;
+			@media (min-width: @screen-sm) {
+				margin:0 0 0 15px;
+			}
+			a {
+				display: block;
+				text-indent: -999em;
+				height: 30px;
+				width: 30px;
+				position: relative;
+				border: none;
+				i {
+					position: absolute;
+					top:0;
+					left:0;
+					text-indent: 0;
+					font-size: 30px;
+					&.fa-facebook:before {
+				    content: "\f09a";
+					}
+				}
+				&.link-facebook:hover {
+					color: @facebook;
+				}
+				&.link-instagram:hover {
+					color: @instagram;
+				}
+				&.link-twitter:hover {
+					color: @twitter;
+				}
+				&.link-vimeo:hover {
+					color: @vimeo;
+				}
+				&.link-youtube:hover {
+					color: @youtube;
+				}
+			}
+		}
+	}
+	.footer-brand {
+	  width: 196px;
+	  height: 44px;
+	  display: block;
+	  text-indent: -999em;
+	  background-image: url(../Assets/Images/ChurchLogo_White.svg);
+	  background-repeat: no-repeat;
+	  background-size: contain;
+	  background-position: center center;
+	  padding:0;
+	  margin:0 0 20px;
+    @media (min-width: @grid-float-breakpoint) {
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{% comment %}
+for ministry pages : {% include "~~/Assets/Lava/StaffByGroup.lava" %}  
+{% endcomment %}
+ <section id="staff" class="staff pod">
+    <div class="row">
+      <div class="col-sm-12 col-md-10 col-lg-8">
+        <div class="section__title --blue">Ministry Directors</div>
+            <div class="block-grid-xs-1 block-grid-sm-1 block-grid-md-2">
+              
+{% for item in Items %}
+
+{% assign salutation = item | Attribute:'StaffSalutation' %}
+{% assign firstName = item | Attribute:'StaffFirstName' %}
+{% assign lastName = item | Attribute:'StaffLastName' %}
+{% assign title = item | Attribute:'StaffJobTitle' %}
+{% assign email = item | Attribute:'StaffEmail' %}
+{% assign phone = item | Attribute:'StaffPhone','NumberFormatted' %}
+{% assign photo = item | Attribute:'StaffPhoto','RawValue' %}
+
+	{%- assign colPos = forloop.index0 | Modulo:2 | Plus:1 -%}
+	{%- assign rowPos = forloop.index | DividedBy:2 | Ceiling -%}
+
+		<div class='block-grid-item' style="-ms-grid-row:{{rowPos}};-ms-grid-column:{{colPos}};">
+	    <div class="staff__item">
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-4">
+    	      <div class="staff__photo"><img src="/GetImage.ashx?Guid={{ photo }}" alt="{{ firstnName }} {{ lastName }}" /></div>
+  	      </div>
+  	      <div class="col-sm-12 col-md-12 col-lg-8 staff__info">
+  	        <div class="staff__name">{{ salutation }} {{ firstName }} {{ lastName }}</div>
+            <div class="staff__title">{{ title }}</div>
+            <a class="btn btn--default --medium" data-toggle="modal" data-target="#staff-{{ item.Id }}">Meet {{ firstName }}</a>
+            
+            <div class="modal fade modal-default staff__modal" id="staff-{{ item.Id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="icon icon-close"></span></button>
+						        <h4 class="modal-title" id="myModalLabel">{{item.Value}}</h4>
+						      </div>
+						      <div class="modal-body">
+						        <div class="row">
+                      <div class="col-sm-12 col-md-12 col-lg-4">
+                	      <div class="staff__photo --large"><img src="/GetImage.ashx?Guid={{ photo }}" alt="{{ firstnName }} {{ lastName }}" /></div>
+              	      </div>
+              	      <div class="col-sm-12 col-md-12 col-lg-6 col-md-offset-2">
+              	        <div class="staff__name">{{ salutation }} {{ firstName }} {{ lastName }}</div>
+                        <div class="staff__title">{{ title }}</div>
+                        <div class="staff__bio">{{ item.Content }}</div>
+                        <ul class="staff__meta">
+                       {% if email != '' %}<li class="staff__email"><span class="icon icon-email"></span><a href="mailto:{{ email }}" title="email to">{{ email }}</a></li>{% endif %}
+                        {% if phone != '' %}<li class="staff__phone"><span class="icon icon-phone"></span>{{ phone | 'NumberFormatted'}}</li>{% endif %}
+                        </ul>    
+                      </div>              	 
+                    </div><!-- end .row -->
+
+						      </div><!-- end .modal-body -->
+						    </div>
+						  </div>
+						</div><!-- end .modal -->
+
+            
+          </div>              	 
+        </div>
+      </div>
+    </div>
+{% endfor %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><!-- end .staff -->

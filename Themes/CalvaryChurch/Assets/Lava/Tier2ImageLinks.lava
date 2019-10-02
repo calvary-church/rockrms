@@ -1,0 +1,32 @@
+{% assign itemCount = Items | Size  %}
+{% if itemCount > 4 %}
+{% assign itemCount = itemCount | DividedBy:2 | Ceiling  %}
+{% endif %}
+<section class="tier2-links">
+<div class="block-grid-xs-2 block-grid-sm-{{ itemCount }} block-grid-md-{{ itemCount }}">
+
+{% for item in Items %}
+{% assign LinkImage = item | Attribute:'LinkImage','RawValue' %}
+{% assign LinkClass = item | Attribute:'LinkClass' %}
+{% assign OverlayTint = item | Attribute:'OverlayTint','RawValue' %}
+{% assign LinkIcon = item | Attribute:'LinkIcon' %}
+
+	{%- assign colPos = forloop.index0 | Modulo:itemCount | Plus:1 -%}
+	{%- assign rowPos = forloop.index | DividedBy:itemCount | Ceiling -%}
+
+	<div class='block-grid-item {{ OverlayTint }} {{ LinkClass }}' style="-ms-grid-row:{{rowPos}};-ms-grid-column:{{colPos}};">
+		<div class="tier-item">
+		<a href="{{item | Attribute:'LinkUrl'}}"></a>
+		<img src="/GetImage.ashx?Guid={{ LinkImage }}&width=840&height=480&mode=crop" alt="{{ item.Title }}">
+		<div class="tier-item__content">
+		{% if LinkIcon and LinkIcon != "" %}
+		  <span class="{{ LinkIcon }}"> </span>
+		{% endif %}
+			<h5>{{ item.Title }}</h5>
+		</div>
+		</div>
+	</div>
+{% endfor %}
+
+</div>
+</section><!-- end . tier2 -->

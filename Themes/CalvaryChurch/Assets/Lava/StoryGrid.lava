@@ -1,0 +1,60 @@
+
+  <div class="block-grid block-grid-xs-1 block-grid-sm-2 block-grid-md-3 row-eq-height">
+
+{% for item in Items offset:1 %}
+
+{% assign Author = item | Attribute:'Author' %}  
+{% assign VimeoId = item | Attribute: 'VimeoId' %}
+{% assign PostDate = item.StartDateTime | Date: 'MMM d, yyyy' %}
+{% assign Category = item | Attribute: 'Category' %}
+{% assign ImageGuid = item | Attribute:'Image','RawValue' %}
+
+	{%- assign colPos = forloop.index0 | Modulo:3 | Plus:1 -%}
+	{%- assign rowPos = forloop.index | DividedBy:3 | Ceiling -%}
+
+		<div class='block-grid-item blog-item' style="-ms-grid-row:{{rowPos}};-ms-grid-column:{{colPos}};">
+      <div class="blog-item__head">
+        <a href="/grow/stories/{{item.PrimarySlug}}" class="img-poster" title="Click to watch {{ item.Title }}"><img alt="{{ item.Title }}" class="posterimage" src="/GetImage.ashx?Guid={{ ImageGuid }}" /></a>
+      </div>
+      <div class="blog-item__info">
+        <div class="blog-item__title"><a href="/grow/stories/{{item.PrimarySlug}}" class="">{{ item.Title }}</a></div>
+        <div class="blog-item__date">{% if Category != ''%}{{ Category }}{% endif %}{% if Category != '' %}&nbsp;&nbsp;|&nbsp;&nbsp;{% endif %}{% if PostDate != ''%}{{ PostDate }}{% endif %}</div>
+      </div><!-- end blog-item__info -->
+    </div>
+    
+{% endfor %}
+	 </div>
+
+<div class="pagination">
+  <div class="row container">
+		<div class="col-sm-12 col-md-8">
+
+      <div class="clearfix">
+        {% assign nextPageString = Pagination.NextPage | ToString %}
+        {% assign prevPageString = Pagination.PreviousPage | ToString %}
+      
+        {% if Pagination.PreviousPage == -1 %}
+        <div class="button button--tan pull-left disabled">
+          <i class="fa fa-chevron-left"></i> Prev
+        </div>
+        {% else %}
+        <a class="btn btn--primary pull-left" href="{{ Pagination.UrlTemplate | Replace:'PageNum', prevPageString }}">
+          <i class="fa fa-chevron-left"></i> Prev
+        </a>
+        {% endif %}
+      
+        {% if Pagination.NextPage == -1 %}
+        <div class="button button--tan pull-right disabled">
+          Next <i class="fa fa-chevron-right"></i>
+        </div>
+        {% else %}
+        <a class="btn btn--primary pull-right" href="{{ Pagination.UrlTemplate | Replace:'PageNum', nextPageString }}">
+          Next <i class="fa fa-chevron-right"></i>
+        </a>
+        {% endif %}
+      </div>
+
+		</div>
+  </div>
+</div>
+

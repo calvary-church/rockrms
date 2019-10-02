@@ -1,0 +1,100 @@
+.intro{
+  background-color: @color-gray-lighter;
+	padding: 45px 15px;
+	@media (min-width: @screen-sm) {
+		padding: 45px 0;
+	}
+  @media (min-width: @screen-md) {
+  		padding: 85px 0 65px;
+  }
+  .homepage & {
+		background-color: @brand-primary;
+		@media (min-width: @screen-sm) {
+			padding: 65px 0 89px;
+		}
+	  .container {
+		  .intro-left,
+		  .intro-right {
+			  h2,h3,h4 {
+				  color: @white;
+				  .font(48,bold);
+				  line-height: @headings-line-height;
+				  margin:0 0 0.5em;
+			  }
+			  p{
+				  .font-phone-intro-copy();
+				  color: @white;
+				  margin: 0;
+				  @media (min-width: @screen-sm) {
+					  	.font-desktop-intro-copy();
+						color: @white;
+				  }
+				}
+			}
+			.intro-right {
+				background: none;
+				padding:0;
+				@media (min-width: @screen-md) {
+					padding:30px 0;
+				}
+				a.button {
+					display: block;
+					@media (min-width: @screen-sm) {
+						display: inline-block;
+					}
+				}
+			}
+		}
+	}
+  .container {
+	  .intro-left {
+		  .font-phone-intro-copy();
+		  @media (min-width: @screen-sm) {
+			  	.font-desktop-intro-copy();
+		  }
+	  }
+	  .intro-right{
+	    background-color: @truewhite;
+	    color: @color-gray-dark;
+	    padding: 30px;
+	    margin-top: 20px;
+	    @media (min-width: @screen-md) {
+		    margin-top:0;
+    		margin-left: 40px;
+	    }
+	    p {
+		    font-size: 16px;
+		    margin:0;
+		    color: @color-gray-dark;
+		    &.location-link {
+					.font(16,500);
+			    margin: 1em 0 0;
+			    a {
+				    color: @color-black;
+				    text-decoration: none;
+				    border-bottom: solid 2px @color-orange-dark;
+				    &:hover {
+					    color: @color-orange-dark;
+				    }
+			    }
+			    .cc-icon {
+				    color: @color-orange-dark;
+				    font-size: 24px;
+				    vertical-align: middle;
+						margin-right: 10px;
+			    }
+		    }
+	    }
+	    ul{
+	      margin: 0 0 20px;
+	      padding: 0;
+	      list-style: none;
+	      li{
+	       a{
+	          color: @brand-secondary;
+	        }
+	      }
+	    }
+	  }
+  }
+}// end .intro

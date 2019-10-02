@@ -1,0 +1,83 @@
+
+// Load Master Styles
+// -------------------------
+@import "../../../Styles/Bootstrap/variables.less";
+@import "../../../Styles/_rock-core.less";
+@import "../../../Styles/_rock-variables.less";
+@import "_variables.less";
+@import "_print.less";
+
+
+/*
+  Rock Theme Styles
+
+  1. HTML Overrides
+  2. Bootstrap Overrides
+  3. Theme Styling
+  4. Responsive Overrides
+
+*/
+
+// 1. HTML Overrides
+// -------------------------
+
+main {
+  display:block;
+}
+
+
+// 2. Bootstrap Overrides
+// -------------------------
+
+
+// 3. Theme Styling
+// -------------------------
+
+header {
+  min-height: 80px;
+  color: @header-text-color;
+  background-color: @header-bg;
+}
+
+main {
+
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  min-height: 80px;
+  padding-top: 24px;
+  color: @footer-color;
+  background-color: @footer-bg;
+}
+
+// Allows for editing of footer zones when admin is editing zones or blocks
+.zone-highlight footer,
+.block-highlight footer {
+  padding-bottom: 36px;
+}
+
+
+// 4. Responsive Overrides
+// -------------------------
+
+// default styling should be for phones 767px or less
+
+// Small devices (tablets, 768px and up)
+@media (min-width: @screen-sm-min) {
+
+}
+
+// Medium devices (desktops, 992px and up)
+@media (min-width: @screen-md-min) {
+  .container {
+    width: 100%;
+  }
+}
+
+// Large devices (large desktops, 1200px and up)
+@media (min-width: @screen-lg-min) {
+
+}

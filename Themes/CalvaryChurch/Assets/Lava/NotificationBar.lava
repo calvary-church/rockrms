@@ -1,0 +1,12 @@
+{% for item in Items %}
+<section id="emergency-notification" class="notification">
+  <a class="closer pull-right"><svg class="cc-icon cc-icon-close"><use xlink:href="#cc-icon-close"></use></svg></a>
+  <div class="container"
+	  <div class="row">
+	    <div class="col-sm-12">
+	      <div>{{ item.Content }}</div>
+	    </div>
+	  </div>
+	</div>
+</section><!-- end notification -->
+{% endfor %}

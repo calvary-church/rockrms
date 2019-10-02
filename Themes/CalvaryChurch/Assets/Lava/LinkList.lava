@@ -1,0 +1,21 @@
+{% assign linkList = DefinedValues | First %}
+{% assign linkListName = linkList.DefinedType.Name %}
+{% assign linkListTitle = linkList.DefinedType.Description %}
+{% assign linkListId = linkList.DefinedType.Id %}
+<div id="{{ linkListName | ToCssClass }}" class="panel panel-block"> 
+    <div class="panel-heading">
+        <h4 class="panel-title">{{ linkListTitle }}</h4>
+        {% if AllowedActions.Edit == true %}
+            <span class="pull-right"><a href="/page/119?definedTypeId={{linkListId}}" target="_blank"><i class='fa fa-gear'></i></a></span>
+        {% endif %}
+    </div>
+    <div class="block-content">
+        <ul class='list-group list-group-panel'>
+        {% for definedValue in DefinedValues %}
+          <li class='list-group-item'><a class="link-{{ definedValue.Value | ToCssClass }}" href='{{ definedValue | Attribute:'LinkURL','RawValue' }}' target='{{ definedValue.LinkTarget }}' >
+	          {% if definedValue.LinkIconClass %}<i class="{{ definedValue.LinkIconClass }}"></i>{% endif %}
+	          {{ definedValue.Value }}</a></li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>

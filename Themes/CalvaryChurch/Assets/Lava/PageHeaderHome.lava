@@ -1,0 +1,77 @@
+{% assign PageHeaderImage = CurrentPage | Attribute:'PageHeaderImage','RawValue' %}
+{% assign PageHeaderImage = CurrentPage | Attribute:'PageHeaderImage','Object' | CloudinaryTransform:'c_fill,g_center,h_945,w_1680,q_auto' %}
+{% assign HeaderCaption = CurrentPage | Attribute:'PageHeaderCaption' %}
+{% if PageHeaderImage and PageHeaderImage != "" %}
+	<section id="billboard" class="hero">  
+    <div class="billboard slide">
+      <div class="billboard-inner">
+          <div class="item overlay">
+						<picture>
+							<source 
+								media="(max-width: 439px)" 
+								sizes="(max-width: 439px) 100vw, 439px" 
+								srcset="{{ CurrentPage | Attribute:'PageHeaderImage','Object' | CloudinaryTransform:'c_fill,g_face,w_200,h_440,q_auto' }} 200w,
+							{{ CurrentPage | Attribute:'PageHeaderImage','Object' | CloudinaryTransform:'c_fill,g_face,w_320,ar_3:4,q_auto' }} 320w,
+							{{ CurrentPage | Attribute:'PageHeaderImage','Object' | CloudinaryTransform:'c_fill,g_face,w_375,ar_3:4,q_auto' }} 375w,
+							{{ CurrentPage | Attribute:'PageHeaderImage','Object' | CloudinaryTransform:'c_fill,g_face,w_439,ar_3:4,q_auto' }} 439w">
+							<source 
+								media="(min-width: 440px) and (max-width: 991px)" 
+								sizes="(max-width: 991px) 100vw, 991px" 
+								srcset="{{ CurrentPage | Attribute:'PageHeaderImage','Object' | CloudinaryTransform:'c_fill,g_face,w_600,ar_4:3,q_auto' }} 600w,
+							{{ CurrentPage | Attribute:'PageHeaderImage','Object' | CloudinaryTransform:'c_fill,g_center,w_768,ar_4:3,q_auto' }} 768w,
+							{{ CurrentPage | Attribute:'PageHeaderImage','Object' | CloudinaryTransform:'c_fill,g_center,w_850,ar_4:3,q_auto' }} 850w,
+							{{ CurrentPage | Attribute:'PageHeaderImage','Object' | CloudinaryTransform:'c_fill,g_center,w_991,ar_4:3,q_auto' }} 991w">
+							<source
+								media="(min-width: 992px) and (max-width: 1199px)"
+								sizes="(max-width: 1199px) 100vw, 1199px"
+								srcset="{{ CurrentPage | Attribute:'PageHeaderImage','Object' | CloudinaryTransform:'c_fill,g_center,w_992,ar_16:9,q_auto' }} 992w,
+								{{ CurrentPage | Attribute:'PageHeaderImage','Object' | CloudinaryTransform:'c_fill,g_center,w_1024,ar_16:9,q_auto' }} 1024w,
+								{{ CurrentPage | Attribute:'PageHeaderImage','Object' | CloudinaryTransform:'c_fill,g_center,w_1199,ar_16:9,q_auto' }} 1199w">
+							<img
+								sizes="(max-width: 1680px) 100vw, 1680px"
+								srcset="{{ CurrentPage | Attribute:'PageHeaderImage','Object' | CloudinaryTransform:'c_fill,g_center,w_1200,ar_16:9,q_auto' }} 1200w,
+								{{ CurrentPage | Attribute:'PageHeaderImage','Object' | CloudinaryTransform:'c_fill,g_center,w_1440,ar_16:9,q_auto' }} 1440w,
+								{{ CurrentPage | Attribute:'PageHeaderImage','Object' | CloudinaryTransform:'c_fill,g_center,w_1680,ar_16:9,q_auto' }} 1680w"
+								src="{{ CurrentPage | Attribute:'PageHeaderImage','Object' | CloudinaryTransform:'c_fill,g_center,w_1680,ar_16:9,q_auto' }}"
+								alt="{{ 'CurrentPage' | Page:'Title' }}">
+						</picture>
+          	<div class="content">
+              {% assign backgroundVideo = CurrentPage | Attribute:'backgroundVideo','RawValue' %}
+              
+              {% if backgroundVideo and backgroundVideo != empty %}
+              	<div id="bgvideo">
+          	    	<video id="background-video" preload="preload" muted playsinline class="cld-video-player" width="100%" height="100%" >
+          				</video>
+          				<script>
+							      var cld = cloudinary.Cloudinary.new({ cloud_name: 'calvarychurch' });
+							
+							      // Initialize player
+							      var playerHls = cld.videoPlayer('background-video', {
+											loop: true,
+											controls: false,
+											autoplayMode: 'always'
+										});
+										
+							      // Modify player source
+							      playerHls.source('{{ backgroundVideo }}', { sourceTypes: ['hls'], transformation: { streaming_profile: 'full_hd' }, poster: "{{ CurrentPage | Attribute:'PageHeaderImage','Object' | CloudinaryTransform:'c_fill,g_center,w_1680,ar_16:9,q_auto' }}" }).play();
+              		</script>
+              	</div>
+          		{% endif %}
+          		{% if HeaderCaption %}
+          	    <div class="page__title">
+                  <div class="container">
+	                  <div class="row">
+		                  <div class="col-xs-12 col-sm-6 col-sm-offset-2 col-md-4 col-md-offset-1 page__title-caption">
+	              	      {{ HeaderCaption }}
+		                  </div>
+	                  </div>
+              	    </div>
+              	</div>
+          	  {% endif %}
+          	</div>
+          </div><!-- end .item-->
+
+        </div>
+      </div>
+  </section>
+{% endif %}

@@ -1,0 +1,232 @@
+section {
+	&.groups{
+	  background-color: @color-gray-light;
+	  padding: 63px 0;
+	  .panel {
+		  background:none;
+		  .panel-body {
+			  #ctl00_main_ctl14_ctl01_ctl08_pnlSearch {
+					background-color: @truewhite;
+					text-align: center;
+					padding: 17px;
+					margin-bottom: 32px;
+					position: relative;
+				  @media (min-width: @screen-sm) {
+					  display: flex;
+				    flex-direction: row;
+				    flex-wrap: nowrap;
+				    justify-content: center;
+				    align-content: stretch;
+				    align-items: center;
+				    .main & .btn {
+					    margin:0 !important;
+				    }
+				    .form-group {
+				      order: 0;
+					    flex: 0 1 auto;
+					    align-self: auto;
+					    padding: 0 15px;
+					    margin:0;
+					    .form-group {
+						    padding:0;
+					    }
+					    label {
+						    //display:none;
+						    &.checkbox-inline {
+							    display: block;
+							    margin-top:0;
+						    }
+					    }
+					    .js-filter-control {
+						    .row {
+							    display: block;
+						    }
+					    }
+					    &.rock-drop-down-list {
+						    .form-control {
+							    min-width: 190px;
+							    max-width: 100%;
+						    }
+					    }
+				    }
+					}
+				}
+		  }
+	  }
+	  .group{
+	    &__item{
+	      background: @truewhite;
+	      margin: 0;
+	      padding: 40px
+	    }
+	    &__category{
+	      .font(16);
+	      text-transform: uppercase;
+	      letter-spacing: 2.8px;
+	    }
+	    &__title{
+	      font-family:  @font-family-serif;
+	      .font(32,600);
+	      color: @color-blue;
+	    }
+	    &__meta{
+	      margin: 10px 0 20px;
+	      padding: 0;
+	      list-style: none; 
+	      li{
+	        padding: 10px 0 5px;
+	        border-bottom: 1px solid @color-gray-lighter;
+	      }
+	      .icon{
+	        font-size: 21px;
+	        line-height: 1.25;
+	      }
+	    }
+	    &__date{
+		    
+	    }
+	    &__time{
+	      
+	    }
+	  }
+	  &.featured {
+		  padding-top: 75px;
+		  padding-bottom: 120px;
+		  .content-section{
+		    &_inner{
+		      
+		    }
+		    &__text{
+			    h2:first-of-type {
+				    margin: 0 0 30px;
+			    }
+		    }
+		  }
+		  .event {
+			  &__image {
+				  img {
+					  width: 100%;
+					  max-width: 100%;
+					  height: auto;					  
+				  }
+			  }
+			  &__item {
+				  margin:0;
+				  padding: 40px;
+				  border: none;
+			  }
+			  &__category {
+				  .font(14);
+				  color: @color-gray-light;
+			  }
+			  &__title {
+				  color: @color-blue;
+			  }
+		  }
+	  }
+	}// end .events{
+}
+#events-calendar {
+	.event-list {
+		&__day-group {
+			border-top: solid 3px @color-gray-dark;
+			padding-top: 33px;
+			.event-date {
+				color: @color-gray-dark;
+				font-family: @font-family-sans-serif;
+				.font(16);
+				letter-spacing: 2.8px;
+				line-height: 18px;
+				text-transform: uppercase;
+			  span {
+				  display: block;
+				  .font(36,bold);
+				  letter-spacing: normal;
+					line-height: 43px;
+					text-transform: none;
+			  }
+			}
+			.event {
+				border-bottom: solid 2px @color-gray-lighter;
+				padding-bottom: 20px;
+				margin-bottom: 30px;
+				@media (min-width: @screen-sm) {
+			    display: grid;
+			    grid-template-columns: 3fr 1fr;
+			  }
+				.event-title {
+					font-family: @font-family-sans-serif;
+					.font(28,bold);
+					line-height: 34px;
+					margin:0;
+					a {
+						
+					}
+				}
+				.event-details__button {
+					.btn {
+						@media (min-width: @screen-sm) {
+							margin-top:0;
+						}
+					}
+				}
+				.event-info {
+					&__time {
+						.font(16,normal,normal);
+						color: @color-gray-light;
+					}
+				}
+			}
+		}
+	}
+}
+#event-detail {
+  background-color: @color-gray-light;
+	.event-image {
+		margin-bottom: 30px;
+	}
+	.event-info {
+		&__contact {
+			text-align: center;
+			padding: 35px 40px 40px;
+			background-color: @truewhite;
+			p {
+				.font(16);
+				strong {
+					.font(20,bold);
+					text-transform: uppercase;
+					display: block;
+				}
+			}
+		}
+	}
+	.event-title {
+		.font(36,bold);
+		line-height: 48px;
+		margin-top:0;
+	}
+	.event-date {
+		.font(20,bold);
+	}
+	.event-info {
+		&__description {
+			margin: 30px 0;
+			:first-child {
+				.font(20);
+			}
+		}
+	}
+	.event-registration {
+		background-color: @truewhite;
+		padding: 22px 40px;
+		@media (min-width: @screen-sm) {
+	    display: grid;
+	    grid-template-columns: 2fr 1fr;
+	    align-items: center;
+	  }
+		&__label {
+			text-transform: uppercase;
+			.font(20, bold);
+		}
+	}
+}

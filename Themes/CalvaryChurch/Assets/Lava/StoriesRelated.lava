@@ -1,0 +1,25 @@
+{%- assign relatedStories = "" %}
+{%- assign itemCtgyArray = Item | Attribute:'Category','RawValue' | Split:',' -%}
+{%- assign contentchannelItems = Item.ContentChannel.Items -%}
+{%- assign itemGuid = Item.Guid -%}
+{%- for thisItem in contentchannelItems -%}
+    {%- assign thisItemCtgyArray = thisItem | Attribute:'Category','RawValue' | Split:',' -%}
+    {%- for ctgy in thisItemCtgyArray -%}
+        {%- if itemGuid != thisItem.Guid -%}
+            {%- assign inArray = itemCtgyArray | Contains:{{ctgy}} -%}
+            {%- if inArray -%}
+            {%- capture relatedStories -%}{{relatedStories}}
+            <li><a href="/grow/stories/{{thisItem.PrimarySlug}}" title="{{thisItem.Title}}">{{thisItem.Title}} <svg class="cc-icon cc-icon-caret"><use xlink:href="#cc-icon-caret"></use></svg></a><br />{{thisItem.StartDateTime | Date: 'MMM d, yyyy'}}
+            {%- endcapture -%}
+            {%- endif -%}
+        {%- endif -%}
+    {%- endfor -%}
+{%- endfor -%}
+{%- if relatedStories != "" %}
+<div class="related-items">
+<h3>Related Stories</h3>
+<ul>
+	{{relatedStories}}
+</ul>
+</div>
+{%- endif -%}

@@ -1,0 +1,10 @@
+{% assign wVI = item | Attribute:'WistiaVideo','RawValue' %}
+{% assign vVI = item | Attribute:'VimeoId' %}
+<p>
+{% if wVI != '' %}
+    {{ item | Attribute:'WistiaVideo' }}
+{% elseif vVI != '' %}
+    {[ vimeo id:'{{ item | Attribute:'VimeoId' }}' ]}
+{% else %}
+{% endif %}
+</p>

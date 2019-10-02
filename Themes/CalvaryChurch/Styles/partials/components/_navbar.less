@@ -1,0 +1,433 @@
+.navbar-toggle {
+  position: relative;
+  float: right;
+  padding: 10px 10px;
+  margin-top: 16px;
+  margin-right: 18px;
+  margin-bottom: 0;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 0px;
+  font-size: 26px;
+  color: @white;
+}
+.navbar-close {
+	position: absolute;
+	top:0;
+	right:0;
+	margin: 18px;
+	font-size: 25px;
+	line-height: 1;
+	border:none;
+	color: @color-orange-dark;
+	background: none;
+  @media (min-width: @grid-float-breakpoint) {
+	  display: none;
+	}
+}
+html.menu-open {
+	body {
+		overflow: hidden;
+	}
+	header {
+		height: 100%;
+	}
+	nav {
+	  position: relative;
+	  height: 100%;
+	  .navbar-header {
+		  //display: none;
+	  }
+	  .container-fluid,
+	  .container-fluid .navbar-collapse div {
+			height: 100%;
+			position: relative;
+		}
+	}
+}
+nav.navbar {
+  position:fixed;
+  top:0;
+  z-index: 9999;
+  transition: all 350ms ease-in-out;
+  border: none;
+  margin:0;
+  width: 100%;
+  @media (min-width: @grid-float-breakpoint) {
+    position:relative;
+    top:inherit;
+    max-width: inherit;
+    width: 100%;
+    background-color: transparent;
+    z-index: inherit;
+    height: inherit;
+  }
+  .page-menu{
+    float: none;
+    .block-content {
+	    #navbar-primary {
+		    display: flex;
+		    flex-direction: column;
+		    justify-content: space-between;
+		    @media (min-width: @screen-lg) {
+		    		align-items: start;
+					flex-direction: row;
+		    }
+	    }
+    }
+  }
+  .navbar-brand {
+	  width: 177px;
+	  height: 40px;
+	  display: block;
+	  text-indent: -999em;
+	  background-image: url(../Assets/Images/ChurchLogo_White.png);
+	  background-repeat: no-repeat;
+	  background-size: contain;
+	  background-position: center center;
+    transition: all 350ms ease-in-out;
+    margin: 15px 0 15px 18px;
+    @media (min-width: @grid-float-breakpoint) {
+      float: left;
+      padding:0;
+			margin: 48px 0 0 3.869048vw;
+			margin-left: 3.869048vw !important;
+		  width: 221px;
+		  height: 50px;
+    }
+    @media (min-width: @screen-xl) {
+			margin: 57px 0 0 3.869048vw;
+			margin-left: 3.869048vw !important;
+		  width: 265px;
+		  height: 60px;
+	  }
+  }
+  .navbar-nav{
+//    height: 100vh;
+//    background-color: @color-gray-light;
+//    overflow-x: scroll;
+    transition: all 350ms ease-in-out;
+    margin: 66px 18px 18px;
+    @media (min-width: @screen-md) {
+      //width: 50vw;
+      //float: right;
+    }
+    @media (min-width: @grid-float-breakpoint) {
+			text-align: center;
+      height: auto;
+      width: auto;
+      background-color: transparent;
+      overflow-x: visible;
+      float: none;
+			flex: 1 1 auto;
+      padding: 15px 0;
+			margin: 48px 0 0 0;
+    }
+    @media (min-width: @screen-xl) {
+      padding: 19px 0;
+      margin: 57px 0 0 0;
+	  }
+    & > li{
+	    padding:15px 22px;
+      position: relative;
+      float: none;
+      display: block;
+      background-color: @white;
+      margin-bottom: 12px;
+      @media (min-width: @grid-float-breakpoint) {
+	      display: inline-block;
+				border-bottom: none; 
+				background:none;
+		    padding:0;
+		    margin:0;
+      }      
+      a{
+	      padding: 23px 28px;
+        display: block;
+        color: @color-gray-dark;
+        text-transform: uppercase;
+        .font(18, bold);
+        line-height: 1;
+        padding: 0;
+        border-bottom: 1px solid transparent;
+        position: relative;
+        @media (min-width: @grid-float-breakpoint) {
+					padding: 10px 15px 20px;
+          color: @white;
+        }
+        @media (min-width: @screen-xl) {
+          .font(22, bold);
+        }
+        &:hover, &:focus, &:active {
+	        background: none;
+	        @media (min-width: @grid-float-breakpoint) {
+	        		color: @color-orange-dark;
+	        }
+        }
+        .cc-icon {
+	        position: absolute;
+	        top:0;
+	        right:0;
+	        @media (min-width: @screen-lg) {
+	        	display: none;
+	        }
+        }
+        .caret {
+	        border: solid 15px transparent;
+					border-top: solid 19px transparent;
+	        border-bottom: solid 19px @color-orange-dark;
+	        position: absolute;
+	        bottom:-8px;
+	        left: 50%;
+          transform: translateX(-50%);
+          display: none;
+        }
+      }
+      &:hover {
+	      @media (min-width: @grid-float-breakpoint) {
+		      ul.dropdown-menu {
+			      display: block;
+		      }
+		    }
+      }
+      &:hover > a,
+	    &.open > a {
+	      background-color: transparent;
+	      border:none;
+	      .caret {
+		      @media (min-width: @grid-float-breakpoint) {
+			      	display: block;
+			    }
+	      }
+	      @media (min-width: @grid-float-breakpoint) {
+		      color: @color-orange-dark;
+	      }
+	    }
+	    &.open > a {
+	      .cc-icon-plus {
+		      display: none;
+	      }
+		  }
+    }// li
+    .dropdown-menu{
+      border:none;
+      margin: 0;
+      padding: 15px 20px;
+      width: 100%;
+      border-radius: 0;
+      @media (min-width: @grid-float-breakpoint) {
+	      background:@white;
+	      border-top: 8px solid @color-orange-dark;
+        margin: 0;
+        padding: 25px 10px;
+        min-width: 287px;
+        border-radius: 0;      
+      }
+      li{// level 2
+        margin: 0;
+        padding: 5px 0;
+        @media (min-width: @grid-float-breakpoint) {
+         margin: 0;
+         padding: 8px 20px;       
+        }
+        a{
+          .font(18,600);
+          color: @color-gray-dark;
+          text-transform: inherit;
+          line-height: 1;
+          padding: 0px!important;
+          display: inline-block;
+          border-bottom: 2px solid transparent;
+          &:hover, &:active, &:focus {
+            color: @color-orange-dark;
+            border-color: @color-orange-dark;
+            text-decoration: none;
+          }
+        }
+        &.active a{
+          background-color: transparent;
+        }
+        ul{// level3
+          list-style: none;
+          margin: 10px 0;
+          padding: 0;
+          li{
+            border-bottom: none;
+            background-color: @white;
+            margin: 3px 20px 3px 0;
+            padding: 5px 15px;
+            border-radius: 1%;
+            @media (min-width: @grid-float-breakpoint) {
+              margin: 0;
+              padding: 4px 15px;     
+              background-color: transparent;
+              border-radius: 0; 
+            }
+            
+            a{
+              .font(16,400);
+              text-transform: inherit;
+              line-height: 1;
+              &:hover{
+                border-bottom: none;
+                @media (min-width: @grid-float-breakpoint) {
+                  color: @brand-secondary;
+                  border-bottom: 1px solid transparent;
+                  text-decoration: none;  
+                }
+                
+              }
+            }
+          }
+        }
+      }
+    }//end .dropdown-menu
+  
+  }
+  .noheader &,
+  .affix & {
+    z-index: 9999;
+    .navbar-header {
+      background: @white;
+    }
+    .navbar-toggle {
+	    color: @color-black;
+	  }
+    .navbar-brand {
+			background-image: url(../Assets/Images/ChurchLogo_Black.png);
+    }
+	  @media (min-width: @grid-float-breakpoint) {
+	    background: @white;
+	    .navbar-header {
+	      background: none;
+	    }
+	    .navbar-brand {
+				margin-top: 20px;
+				margin-bottom: 20px;
+	    }
+	    .navbar-nav{
+	      margin-top:35px;
+	      padding:0;
+	      & > li{
+	        a{
+	          color: @color-gray-dark;
+	          &:hover, &:focus, &:active {
+		          color: @color-orange-dark;
+	          }
+	        }
+	      }
+	    }// end .navbar-nav
+	    #quick-links{
+	      margin-top:35px;
+	      padding:0;
+	      li{
+	        color: @color-gray-dark;
+	        a{
+						color: @color-gray-dark;
+						.cc-icon{
+							color: @brand-primary;
+						}
+	          &:hover, &:focus, &:active {
+		          color: @brand-primary;
+	          }
+	        }
+	      }
+	    }    
+	  }
+	} // end .affix
+  .navbar-collapse {
+	  border:none;
+	  padding:0;
+	  width: 100%;
+	  @media (max-width: @grid-float-breakpoint-max) {
+		  position: absolute;
+		  top:0;
+		  left:0;
+		  right:0;
+		  bottom:0;
+		  margin:0;
+		  background-color: #eeeeee;
+		}
+	  @media (min-width: @screen-sm) {
+	  	width: 350px;
+	  	left:auto;
+	  }
+	  @media (min-width: @screen-lg) {
+		  width: 100%;
+	  }
+  }
+}// end nav
+#quick-links{
+  transition: all 350ms ease-in-out;
+  text-align: center;
+  background-color: @color-orange-dark;
+  margin:0;
+  padding: 18px;
+  @media (min-width: @grid-float-breakpoint) {
+    padding: 15px 0;
+		margin: 48px 3.869048vw 0 0;
+		text-align: right;
+		background:none;
+  }
+  @media (min-width: @screen-xl) {
+    padding: 19px 0;
+    margin: 57px 3.869048vw 0 0;
+  }
+  li{
+    color: @white;
+    position: relative;
+    padding: 0;
+    .font(17,600);
+    margin-left: 10px;
+    @media (min-width: @grid-float-breakpoint) {
+	    margin-left:0;
+    }
+    a{
+			color: @white;
+			display: block;
+			text-decoration: none;
+			text-align: left;
+			@media (min-width: @grid-float-breakpoint) {
+			  padding: 2px 0 0;
+			  margin: 0 8px;
+			  position: relative;
+			  text-indent: -999em;
+			  height: 28px;
+			  width:20px;
+			}
+			@media (min-width: @screen-laptop-min) {
+				height: auto;
+				width: auto;
+				text-indent: 0;
+			}
+			.cc-icon{
+				 font-size: 20px;
+				 margin-right: 4px;
+				 float: left;
+				 @media (min-width: @screen-sm) {
+				 	float: none;
+				 	margin-left: 9px;
+				 }
+				 @media (min-width: @grid-float-breakpoint) {
+					 position: absolute;
+					 bottom:0;
+					 left:0;
+					 text-indent: 0;
+					 margin:0;
+				 }
+				 @media (min-width: @screen-laptop-min) {
+					 position: relative;
+					 top:inherit;
+					 left:inherit;
+					 margin:0 4px 0 9px;
+				 }
+			}
+			&:hover {
+				@media (min-width: @screen-laptop-min) {
+					border-bottom: solid 2px @brand-primary;
+				}
+			}
+    }
+  }
+}

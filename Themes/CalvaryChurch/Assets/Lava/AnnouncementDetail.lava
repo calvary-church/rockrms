@@ -1,0 +1,27 @@
+
+
+{% assign VimeoId = Item | Attribute: 'VimeoVideoId' %}
+
+  <div class="row blog-item">
+    <div class="col-md-6 blog-item__info">
+      <div class="blog-item__title">{{ Item.Title }}</div>
+      <div class="blog-item__date">{{ Item.StartDateTime | Date: 'MMM d, yyyy ' }}</div>
+      <div class="blog-item__content">
+		    {{ Item.Content }} 
+		    {% if VimeoId != "" %}
+		    <div class="embed-responsive embed-responsive-16by9">
+					<iframe src="https://player.vimeo.com/video/{{ VimeoId }}?title=0&byline=0&portrait=0" width="640" height="360" js-player-fullscreen no-playbar with-sticky-custom-logo player-sm player-cardsCorner webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+				</div>
+				{% endif %}
+	    </div>
+    </div>
+    <div class="col-md-3 col-md-offset-2 blog-item__share">
+      <ul>
+        <li><a href=""><span class="icon icon-facebook"></span></a></li>
+        <li><a href=""><span class="icon icon-twitter"></span></a></li>
+        <li><a href=""><span class="icon icon-email"></span></a></li>
+      </ul>
+      
+    </div>
+  </div>
+  

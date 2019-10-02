@@ -1,0 +1,17 @@
+{% sql %}
+    SELECT [Name], [Url] FROM [Campus] 
+    WHERE [IsActive] = 'true'
+    ORDER BY [Order]
+{% endsql %}
+<div id="footer-campus-info" class="panel panel-block"> 
+    <div class="panel-heading">
+        <h4 class="panel-title">Campuses</h4>
+    </div>
+    <div class="block-content">
+        <ul class="list-group list-group-panel">
+        {% for Campus in results %}
+            <li class="list-group-item"><a href="{{ Campus.Url }}">{{ Campus.Name }}</a></li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>

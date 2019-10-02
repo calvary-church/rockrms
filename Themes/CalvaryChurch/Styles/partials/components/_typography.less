@@ -1,0 +1,16 @@
+blockquote{
+  font-size:18px;
+  color: @brand-primary;
+  margin: 0 percentage((1 / @grid-columns));
+  padding: 20px 0;
+  font-style: italic;
+  @media (min-width: @screen-sm) {
+    font-size:22px;
+  }
+}
+.intro-copy {
+  .font-phone-intro-copy();
+  @media (min-width: @screen-sm) {
+  	.font-desktop-intro-copy();
+  }
+}

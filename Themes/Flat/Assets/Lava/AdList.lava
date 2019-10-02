@@ -1,0 +1,26 @@
+﻿<div class="announcement-list">
+
+  {% for item in Items -%}
+    {%- assign itemPrimarySlug = item.PrimarySlug | Trim -%}
+    {%- if LinkedPages.DetailPage contains '{Slug}' and itemPrimarySlug != '' -%}
+      {%- assign itemLink = LinkedPages.DetailPage | Replace:'{Slug}',item.PrimarySlug | Prepend:'/' -%}
+    {%- else -%}
+      {%- if LinkedPages.DetailPage contains '{Slug}' -%}
+        {%- assign itemLink = LinkedPages.DetailPage | Replace:'{Slug}',item.Id | Prepend:'/' -%}
+      {%- else -%}
+        {%- capture itemLink -%}{{ LinkedPages.DetailPage }}?Item={{ item.Id }}{%- endcapture -%}
+      {%- endif -%}
+    {%- endif -%}
+    <div class="announcement">
+      <a href="{{ itemLink }}">{{ item | Attribute:'Image' }}</a>
+    </div>
+
+    {% capture breakNow %}{{ forloop.index | Modulo:3 }}{% endcapture %}
+    {% if breakNow == 0 -%}
+      </div>
+      <div class="announcement-list">
+    {% endif -%}
+
+  {% endfor -%}
+
+</div>

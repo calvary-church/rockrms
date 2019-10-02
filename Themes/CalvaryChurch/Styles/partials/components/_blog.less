@@ -1,0 +1,231 @@
+.announcement{
+  h2{
+    .font(36,600);
+    color: @brand-primary;
+  }
+}
+
+.blog{
+  background-color: @gray-lighter;
+  &-item{
+    background-color: @truewhite;
+    padding: 50px 65px;
+    margin: 0 56px 30px;
+    &.latest{
+      background-color: @truewhite;
+      padding: 20px;
+      margin: 20px 0 50px;
+      @media (min-width: @screen-sm) {
+        padding: 80px;
+        margin: 50px 0;       
+      }
+      .blog-item__info{
+
+      }
+      p{
+        margin-bottom: 10px;
+      }
+      .blog-item__date{
+        font-weight: 600;
+      }
+    }
+    &__info{
+      h6{
+        display: inline-block;
+        .font(16);
+        color: @color-gray-light;
+        text-transform: uppercase;
+        letter-spacing: 2.8px;
+        padding-bottom: 0px;
+        border-bottom: solid @color-gray-lighter 1px;
+        margin: 0;
+      }
+    }// end .__info
+    &__title{
+      color: @text-color;
+      .font(36,700);
+      margin: 5px 0;
+      @media (min-width: @screen-sm) {
+        .font(48,700);
+
+      }
+    }
+    &__date{
+      margin-bottom: 10px;
+    }
+    &__content{
+      margin: 20px 0 0;
+      position: relative;
+      border-bottom: solid @brand-primary 8px;
+      @media (min-width: @screen-md) {
+        margin: 20px 0 0 50px;
+      }
+    }
+  }
+}// end .blog
+.blog-grid{
+  .block-grid{
+    padding: 10px 0;
+  }
+  .blog{
+    &-item{
+      background-color: @truewhite;
+      border-bottom: solid transparent 8px;
+
+      &:hover{
+        border-bottom: solid @brand-primary 8px;
+        transform: translateY(-5px);
+        box-shadow: 0 3px 6px rgba(0,0,0,.16);
+        transition: all ease-in-out .3s;
+      }
+      &.latest{
+        background-color: @truewhite;
+        padding: 20px;
+        margin: 20px 0;
+        @media (min-width: @screen-sm) {
+          padding: 80px;
+          margin: 50px 0;   
+        }
+        .blog-item__info{
+  
+        }
+      }
+      &__head{
+        position: relative;
+        .playbutton{
+          position: absolute;
+          .vc();
+          .hc();
+        }
+      }
+      img{
+        width: 100%;
+      }
+      &__info{
+        padding: 20px 36px 10px;
+      }// end .__info
+      &__title{
+        line-height: .6;
+        margin: 0;
+        a{
+          color: @text-color;
+          .font(24,700);
+          margin: 5px 0;
+        }
+      }
+      &__date{
+        margin: 15px 0;
+      }
+    }
+  }
+  
+}//end .blog-grid
+.blog-article{
+  padding: 60px 20px 20px 20px;
+  @media (min-width: @screen-sm) {
+    padding: 60px 120px 120px 60px;
+   }
+  .embed-responsive{
+    margin-bottom: 10px;
+    @media (min-width: @screen-sm) {
+      margin-bottom: 30px;     
+    }
+  }
+  .blog-item{
+    padding: 0 0 10px;
+    margin: 0 0 10px;
+    @media (min-width: @screen-sm) {
+      padding: 0 0 50px;
+      margin: 0 0 30px;
+    }
+    background: transparent;    
+    &__info{
+      border-right: none;
+      padding: 0;
+    }// end .__info
+
+    &__title{
+      color: @text-color;
+      .font(36,700);
+    }
+    &__date{
+      .font(20,600);
+      color: @text-color;
+    }
+    &__content{
+      padding: 10px 0;
+      margin: 0;
+      border-bottom: none;
+    }
+  }
+}
+.right-sidebar{
+  padding: 60px 20px 60px;
+  @media (min-width: @screen-sm) {
+    padding: 160px 0 120px;       
+  }
+  h3{
+    color: @text-color;
+    margin: 0 0 17px;
+  }
+  .blog-item{
+    &__share{   
+      ul{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        li{
+          padding: 10px;
+          display: inline-block;
+          a{
+            display: block;
+            span {
+              margin-top: -1px;
+      					&.fa-facebook:before {
+      				    content: "\f09a";
+      					}
+      				}
+          }
+        }
+      }
+      .fab, .cc-icon{
+        border-radius: 0;
+        color: @gray;
+        .font(32);
+        transition: all .25s ease-in-out;
+        &:hover{
+          color:#595859;
+        }
+      } 
+    }// end .share
+
+  }
+  .related-items{
+    margin-top: 50px;
+    ul{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      li{
+        .font(16);
+        padding: 12px 0;
+        border-bottom: 3px solid #D3D3D3;
+        a{
+          .font(20, 600)
+        }
+        svg.cc-icon.cc-icon-caret {
+          transform: rotate(270deg);
+          margin-top: 3px;
+          .font(16);
+        }
+      }
+    }
+  }
+
+}
+.pagination .row{
+  display: flex;
+    justify-content: center;   
+    margin-left:-15px;
+    margin-right: -15px;
+}

@@ -1,0 +1,65 @@
+ 	<section id="featured-events" class="featured events">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="content-section__text">
+            <h2>Featured Events</h2>
+		        <div class="block-grid-xs-1 block-grid-sm-3 block-grid-md-3">
+					  {% for eventitem in EventItems limit:6 %}
+					  {% assign firstOccurrence = eventitem | First %}
+					  {% assign eventWebsiteImage = firstOccurrence.EventItem | Attribute:'WebsiteImage', 'Object' | CloudinaryTransform:'c_fill,g_faces,w_840,h_590,q_auto' %}
+	{%- assign colPos = forloop.index0 | Modulo:3 | Plus:1 -%}
+	{%- assign rowPos = forloop.index | DividedBy:3 | Ceiling -%}
+
+	<div class='block-grid-item' style="-ms-grid-row:{{rowPos}};-ms-grid-column:{{colPos}};">
+		          {% if firstOccurrence.EventItem.PhotoId or eventWebsiteImage %}
+		            <div class="event__image">
+	            {% if firstOccurrence.EventItem.DetailsUrl != '' %}
+	              <a href="{{ firstOccurrence.EventItem.DetailsUrl }}">
+							{% else %}
+	              <a href="{{ DetailsPage }}?EventId={{ firstOccurrence.EventItem.Id }}">
+		          {% endif %}
+		          {% if eventWebsiteImage != "" %}
+		              <img src="{{ eventWebsiteImage }}" alt="{{ firstOccurrence.EventItem.Name }}" width="840" height="590" /></a>
+		          {% else %}
+		              <img src="/GetImage.ashx?id={{ firstOccurrence.EventItem.PhotoId }}&width=840&height=590&mode=crop&anchor=middlecenter" alt="{{ firstOccurrence.EventItem.Name }}" width="840" height="590" /></a>
+		          {% endif %}
+		            </div>
+		          {% endif %}
+	              <div class="event__item">
+		              {% comment %}
+		              <div class="event__category">
+			              {% for category in firstOccurrence.EventItem.EventItemAudiences %}
+			              <span>{{ category.DefinedValue.Value }}</span>{% if forloop.last %}{% else %}, {% endif %}
+			              {% endfor %}
+		              </div>
+		              {% endcomment %}
+	                <div class="event__title">
+      	            {% if firstOccurrence.EventItem.DetailsUrl != '' %}
+			              <a href="{{ firstOccurrence.EventItem.DetailsUrl }}">
+			            {% else %}
+										<a href="{{ DetailsPage }}?EventId={{ firstOccurrence.EventItem.Id }}">
+			            {% endif %}
+		                {{ firstOccurrence.EventItem.Name }}</a>
+		              </div>
+	                <ul class="event__meta">
+		              {% assign fst = firstOccurrence.EventItemOccurrence.Schedule.FriendlyScheduleText %}
+		              {% assign customDateTimeDisplay = firstOccurrence.EventItem | Attribute:'CustomDateTimeDisplay' %}
+		              	{% if customDateTimeDisplay != "" %}
+		              		<li class="event__date">{{ customDateTimeDisplay }}</li>
+		              	{% elseif fst contains "Weekly" %}
+		              		<li class="event__date">{{ fst | Remove:"Weekly: " }}</li>
+		              	{% elseif fst contains "Once" %}
+	                  <li class="event__date">{{ firstOccurrence.EventItemOccurrence.Schedule.iCalendarContent | DatesFromICal | First | Date: 'MMM d' }}</li>
+	                  <li class="event__time">{{ firstOccurrence.EventItemOccurrence.Schedule.iCalendarContent | DatesFromICal | First | Date: 'h:mm tt' | Replace:':00','' }}</li>
+		              	{% else %}
+	                  <li class="event__date">{{ fst }}</li>
+	                 {% endif %}
+	                </ul>	        
+	              </div>
+	            </div>
+          {% endfor %}
+		        </div>
+          </div><!-- end content-section__text-->
+        </div>        
+      </div>
+  </section><!-- end .featured-events-->

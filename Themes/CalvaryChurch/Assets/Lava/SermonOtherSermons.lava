@@ -1,0 +1,39 @@
+{% assign messageWeekItem = Item.ParentItems | First %}
+{% assign seriesItem = messageWeek.ContentChannelItem.ParentItems | First %}
+{% assign messageWeek = messageWeekItem.ContentChannelItem %}
+{% assign messageSeries = seriesItem.ContentChannelItem %}
+<div id="series-related">
+	<div class="series-detail row">
+		<div class="col-sm-12">
+			<h2 class="series-detail__title">All Messages in the Series</h2>
+			<ul class="series-detail__sermons-list sermon-list">
+				{% assign seriesWeeks = messageSeries.ChildItems | Sort:'Order' %}
+				{% for week in seriesWeeks %}
+				{% assign startDate = week.ChildContentChannelItem.StartDateTime | Date:'yyyyMMdd' %}
+				{% assign dateNow = 'Now' | Date:'yyyyMMdd' %}
+				{% if startDate <= dateNow %}
+					<li class="sermon-list__sermon sermon">
+					<p class="sermon__date">{{ week.ChildContentChannelItem.Title }} | {{ week.ChildContentChannelItem.StartDateTime | Date:'MMMM d' }}</p>
+					<div class="row">
+						<div class="col-md-6">
+  						{% assign firstItem = week.ChildContentChannelItem.ChildItems | First %}
+  						{% assign messageTitle = firstItem.ChildContentChannelItem.Title %}
+							<h3 class="sermon__title">{{ messageTitle }}</h3>
+						</div>
+						<div class="col-md-6">
+							<ul class="sermon-list__messages list-inline">
+  						{% for message in week.ChildContentChannelItem.ChildItems %}
+  						{% if message.ChildContentChannelItem.ContentChannelId == 20 %}
+  							<li><a href="{{ message.ChildContentChannelItem.PrimarySlug }}">{{ message.ChildContentChannelItem | Attribute:'Campus' }} <svg class="cc-icon cc-icon-caret"><use xlink:href="#cc-icon-caret"></use></svg></a></li>
+  						{% endif %}
+  						{% endfor %}
+							</ul>
+						</div>
+					</div>
+					</li>
+				{% endif %}
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,19 @@
+{% for item in Items %}
+
+{% comment %}/{{ item.PrimarySlug | Trim }}/{{ LinkedPages.DetailPage }}{% endcomment %} 
+  {%- assign itemPrimarySlug = item.PrimarySlug | Trim -%}
+  {%- if LinkedPages.DetailPage contains '{Slug}' and itemPrimarySlug != '' -%}
+    {%- assign itemLink = LinkedPages.DetailPage | Replace:'{Slug}',item.PrimarySlug | Prepend:'/' -%}
+  {%- else -%}
+    {%- assign itemLink = LinkedPages.DetailPage | Replace:'{Slug}',item.Id | Prepend:'/' -%}
+
+  {%- endif -%}
+{% assign Author = item | Attribute:'Author' %} 
+<div class="card__category">Weekly</div>
+<div class="card__title">Announcements</div>
+<ul class="card__meta">
+  <li class="card__date">{{ item.StartDateTime | Date: 'MMM d, yyyy ' }}</li>
+</ul>
+<a class="btn btn--primary --medium" href="/{{ LinkedPages.DetailPage }}?Item={{ item.Id }}">Watch</a>
+<a class="btn btn--default --medium --tan" href="/announcements">All Announcements</a>
+{% endfor %}

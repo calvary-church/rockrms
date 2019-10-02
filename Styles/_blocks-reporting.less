@@ -1,0 +1,115 @@
+/*
+    Used to manage styles for specific blocks.
+
+    1. SQL Command - block to query database directly
+    2. Data Views - block for creating data views
+    3. Dynamic Report - block for making reports dynamically updated
+    4. Interactions
+*/
+
+
+// 1. SQL Command
+// -------------------------
+
+.sql-comand {
+  .panel {
+    margin-bottom: 24px;
+  }
+}
+
+// 2. Data Views
+// -------------------------
+
+/* data views */
+.filter-toggle {
+  margin-top: 5px;
+
+  & > span {
+    float: left;
+  }
+
+  .btn-toggle {
+    margin: 0 6px;
+  }
+}
+
+.filter-item-select {
+  span {
+    float: left;
+    padding: 8px 6px 0 0;
+  }
+
+  select {
+    float: left;
+    width: 250px;
+  }
+}
+
+// add top margin to checkbox lists in filters
+.field-criteria {
+  .checkbox-inline {
+    margin-top: 8px;
+  }
+
+  @media @md {
+    // Vertically align criteria fields to the top
+    > div {
+      display: table-cell;
+      float: none;
+      vertical-align: top;
+    }
+
+    .vertical-align-bottom {
+      vertical-align: bottom;
+    }
+  }
+}
+
+.filter-item div[class*="col"] {
+  margin-bottom: 6px;
+  @media (min-width: @screen-md-min) {
+    margin-bottom: 0;
+  }
+}
+
+// 3. Dynamic Report
+// -------------------------
+
+.filterfield {
+  margin-bottom: 12px;
+
+  // Override table-cell alignment for dynamic reports and data views
+  .field-criteria > div {
+    display: block;
+    float: left;
+  }
+}
+
+.filterfield-label {
+  display: block;
+  margin-top: 8px;
+  font-weight: @font-weight-semibold;
+}
+
+// 4. Interactions
+// -------------------------
+
+.list-panel {
+  > .grid-filter {
+    padding: 6px 12px;
+    margin: -15px -15px 15px -15px;
+
+    > header {
+      position: relative;
+    }
+
+    .grid-filter-entry {
+      padding-top: inherit;
+    }
+  }
+}
+
+.list-panel .grid-filter .btn-link {
+  position: relative;
+  margin: 0;
+}

@@ -1,0 +1,22 @@
+{% assign itemCount = Items | Size  %}
+
+<section id="callout" class="callout pod">
+<div class="container">
+<div class="row">
+
+{% for item in Items %}
+{% assign UrlLink = item | Attribute:'UrlLink','RawValue' %}
+{% assign ButtonLabel = item | Attribute:'ButtonLabel' %}
+{% assign UrlTarget = item | Attribute:'UrlTarget' %}
+
+  <div class="col-sm-12 col-md-7">
+        {{ item.Content}}
+  </div>
+  <div class="col-sm=12 col-md-5 text-center align-middle">
+    <a href="{{ UrlLink }}" target="{{ UrlTarget }}" class="btn btn--default --xlarge">{{ ButtonLabel }}</a>
+  </div>
+  
+{% endfor %}
+</div>
+</div>
+</section><!-- end .callout -->

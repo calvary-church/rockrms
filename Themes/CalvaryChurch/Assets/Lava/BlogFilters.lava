@@ -1,0 +1,21 @@
+<div id="blog-filters" class="filters no-flex">
+	<div class="row">
+		<div class="col-sm-6 col-md-4">
+			{% attributequalifier where:'AttributeId == {{aqid}} && Key == "values"' %}
+			{% for item in attributequalifierItems %}
+			{% assign attributeValues = item.Value | Split:',' | Sort %}
+				<select class="form-control" name="Category">
+					<option>Category</option>
+				{% for category in attributeValues %}
+				{% assign ctgySlugName = category | Split:'^' %}
+					<option value="{{ctgySlugName[0]}}">{{ctgySlugName[1]}}</option>
+				{% endfor %}
+				</select>
+			{% endfor %}
+			{% endattributequalifier %}
+		</div>
+		<div class="col-sm-6 col-md-4 col-md-offset-4 text-sm-right">
+			<a class="button button--outline button--primary">Share Your Story</a>
+		</div>
+	</div>
+</div>

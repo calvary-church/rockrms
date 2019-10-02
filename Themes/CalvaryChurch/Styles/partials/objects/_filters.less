@@ -1,0 +1,111 @@
+.filters {
+	//background-color: rgba(60,47,45,0.2);
+	text-align: center;
+	padding: 0 0 28px 0;
+	margin-bottom: 32px;
+	position: relative;
+	border-bottom: solid 8px @color-blue;
+  @media (min-width: @screen-sm) {
+	  text-align: left;
+	}
+  @media (min-width: @screen-md) {	
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-content: stretch;
+    align-items: center;
+  }
+  &.no-flex {
+	  display: block;
+  }
+  .main & .btn {
+    margin:0 !important;
+  }
+  .form-group {
+    margin:0;	    
+  }
+	@media (min-width: @screen-sm) {
+	  .filters-campus {
+			order: 0;
+			flex: 1 1 auto;
+			align-self: auto;
+	    .form-group {
+				display: flex;
+		    flex-direction: row;
+		    flex-wrap: nowrap;
+		    justify-content: flex-start;
+		    align-content: stretch;
+		    align-items: center;
+		    .control-label {
+			    font-size: 20px;
+			    font-weight: bold;
+			    text-transform: uppercase;
+			    line-height: 1.4em;
+			    margin:0;
+			    display: inline-block;
+			    width: 120px;
+		    }
+		    .checkbox-inline {
+			    display: inline;
+			    padding:0;
+			    input[type="checkbox"] {
+				    display: none;
+				    &[checked="checked"]+.label-text {
+					    background-color: @brand-primary;
+					    color: @white;
+				    }
+			    }
+			    .label-text {
+				    white-space: nowrap;
+				    font-size: 16px;
+				    font-weight: bold;
+				    text-transform: uppercase;
+				    color: @brand-primary;
+				    border: solid 2px @brand-primary;
+				    line-height: 1;
+				    padding: 10px 20px;
+				    border-radius: 2em;
+				    min-width: 160px;
+				    display: inline-block;
+				    text-align: center;
+				  }
+		    }
+		  }
+	  }
+	  .form-group {
+	    .form-group {
+		    padding:0;
+	    }
+	    label {
+		    display:none;
+	    }
+	    &.rock-drop-down-list {
+		    .form-control {
+			    min-width: 190px;
+			    max-width: 100%;
+		    }
+	    }
+	    &.date-range-picker {
+		    .input-group {
+			    margin-bottom: 0;
+		    }
+		  }
+	  }
+  }
+	.button {
+		margin-bottom:0;
+		margin-top: 10px;
+		@media (min-width: @screen-sm) {
+			margin-top:0;
+		}
+	}
+}
+#blog-filters {
+	margin:0;
+}
+.text-sm-right {
+	@media (min-width: @screen-sm) {
+		text-align: right;
+	}
+}

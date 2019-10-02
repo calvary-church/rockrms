@@ -1,0 +1,59 @@
+
+  <div class="blog-grid block-grid block-grid-xs-1 block-grid-sm-2 block-grid-md-3 row-eq-height">
+
+{% for item in Items %}
+
+{% assign Author = item | Attribute:'Author' %}  
+{% assign VimeoId = item | Attribute: 'VimeoId' %}
+{% assign PostDate = item.StartDateTime | Date: 'MMM d, yyyy' %}
+{% assign Category = item | Attribute: 'Category' %}
+
+    <div class="block-grid-item  blog-item">
+      <div class="embed-responsive embed-responsive-16by9">
+          <iframe src="https://player.vimeo.com/video/{{ VimeoId }}?title=0&byline=0&portrait=0" width="640" height="360" js-player-fullscreen no-playbar with-sticky-custom-logo player-sm player-cardsCorner webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        </div>
+      <div class="blog-item__info">
+        <div class="blog-item__title"><a href="{{ LinkedPages.DetailPage }}?Item={{ item.Id }}" class="">{{ item.Title }}</a></div>
+        <div class="blog-item__date">{% if Category != ''%}{{ Category }}{% endif %}{% if Category != '' %}&nbsp;&nbsp;|&nbsp;&nbsp;{% endif %}{% if PostDate != ''%}{{ PostDate }}{% endif %}</div>
+      </div><!-- end blog-item__info -->
+    </div>
+    
+{% endfor %}
+	 </div>
+
+
+<div class="container pagination">
+  <div class="row">
+		<div class="col-sm-10 col-md-8">
+
+      {% if Pagination.TotalPages > 1 %}
+      <div class="margin-t-lg">
+        {% assign nextPageString = Pagination.NextPage | ToString %}
+        {% assign prevPageString = Pagination.PreviousPage | ToString %}
+      
+        {% if Pagination.PreviousPage == -1 %}
+        <div class="disabled pull-left">
+          <i class="fa fa-chevron-left"></i> Previous
+        </div>
+        {% else %}
+        <a class="pull-left" href="{{Pagination.UrlTemplate | Replace:'PageNum', prevPageString}}">
+          <i class="fa fa-chevron-left"></i> Previous
+        </a>
+        {% endif %}
+      
+        {% if Pagination.NextPage == -1 %}
+        <div class="disabled pull-right">
+          Next <i class="fa fa-chevron-right"></i>
+        </div>
+        {% else %}
+        <a class="pull-right backlink" href="{{Pagination.UrlTemplate | Replace:'PageNum', nextPageString}}">
+          Next <i class="fa fa-chevron-right"></i>
+        </a>
+        {% endif %}
+      </div>
+      {% endif %}
+
+		</div>
+  </div>
+</div>
+

@@ -1,0 +1,203 @@
+#campus-locations {
+	background-color: tint(@white,40%);
+	position: relative;
+	padding: 0;
+	@media (min-width: @screen-sm) {
+		padding: 0;
+	}
+	&.detail {
+		background-image: url(../Assets/Images/Map_Mobile.png);
+		background-size: 100% auto;
+		background-position: top left;
+		background-repeat: no-repeat;
+	}
+	.content {
+		pointer-events: none;
+		@media (min-width: @screen-sm) {
+			position: absolute;
+			bottom:55px;
+			left:0;
+			width:100%;
+			z-index: 5;
+		}
+	}
+	.drop-shadow {
+	}
+	#campusmap {
+		width: 100%;
+		height: 650px;
+		display: none;
+		pointer-events: all;
+		@media (min-width: @screen-sm) {
+			display: block;
+		}
+		.si-float-wrapper .si-pointer-bottom,
+		.si-frame.si-content-wrapper .si-close-button {
+			display: none;
+		}
+		.si-content {
+			overflow: inherit;
+		}
+		.infowindow {
+			font-family: @font-family-base;
+			width: 220px;
+			.panel-title {
+				.font(20,bold);
+				margin: 0;
+				color: @brand-primary;
+				text-transform: none;
+				white-space: nowrap;
+				a {
+					text-decoration: none;
+				}
+			}
+			.collapse {
+				margin-top: 10px;
+				p {
+					.font(20);
+					color: @text-color;
+					margin: 0 0 10px;
+					strong, b {
+						color: @gray-dark;
+					}
+			    &.location-link {
+			    		.font(@font-size-base,500);
+				    margin: 0;
+				    a {
+					    color: @color-black;
+					    text-decoration: none;
+					    border-bottom: solid 2px @color-orange;
+					    &:hover {
+						    color: @color-orange;
+					    }
+				    }
+				    .cc-icon {
+					    color: @color-orange;
+					    font-size: 24px;
+					    vertical-align: middle;
+					    margin-right: 5px;
+				    }
+			    }
+				}
+			}
+		}
+	}
+	.campuslist {
+		margin: 0;
+		padding: 18px;
+		position: relative;
+		background-image: url(../Assets/Images/Map_Mobile.png);
+		background-size: 100% auto;
+		background-position: top left;
+		@media (min-width: @screen-sm) {
+			display :none;
+		}
+		.panel-group {
+			margin:0;
+			.panel {
+				background-color: @white;
+				+.panel {
+					margin-top: 12px;
+				}
+				&-heading {
+					padding: 0;
+				}
+				&-title {
+					padding: 20px;
+					border:none;
+					a {
+						padding-bottom: 0;
+						line-height: 1;
+					}
+				}
+				&-body {
+					padding: 0 32px 32px;
+					p {
+				    .font(@font-size-base);
+				    margin:0;
+				    color: @color-gray-dark;
+				    &.location-link {
+				    		.font(@font-size-base,500);
+					    margin: 1em 0 0;
+					    a {
+						    color: @color-black;
+						    text-decoration: none;
+						    border-bottom: solid 2px @color-orange;
+						    &:hover {
+							    color: @color-orange;
+						    }
+					    }
+					    .fas,
+					    .cc-icon {
+						    color: @color-orange;
+						    font-size: 24px;
+						    vertical-align: middle;
+						    margin-right: 5px;
+					    }
+				    }
+			    }
+				}
+			}
+		}
+	}
+	.mission-statement {
+		background-color:@truewhite;
+		color:@brand-primary;
+		font-size: 30px;
+		.font(40,bold);
+		margin: 0;
+		line-height: 1.2em;
+		padding: 50px 20px;
+		&:before {
+			content:"";
+			width: 35%;
+			border-top: 10px solid @brand-primary; 
+			display: block;
+			margin-bottom: 25px;
+		}
+		@media (min-width: @screen-sm) {
+			.box-shadow();
+			padding: 52px 42px;
+		}
+		span {
+			display: block;
+		}
+	}
+	.contact-info {
+		background-color:@truewhite;
+		padding: 20px;
+		margin: 18px 3px;
+		@media (min-width: @screen-sm) {
+			.box-shadow();
+			padding: 52px 42px;
+			margin: 85px 0;
+		}
+		@media (min-width: @screen-md) {
+			padding: 52px 42px;
+		}
+		p {
+	    .font(@font-size-base);
+	    margin:0;
+	    color: @color-gray-dark;
+	    &.icon-link {
+	    		.font(@font-size-base,500);
+		    margin: 1em 0 0;
+		    a {
+			    color: @color-black;
+			    text-decoration: none;
+			    border-bottom: solid 2px @color-blue;
+			    &:hover {
+				    color: @color-blue;
+			    }
+		    }
+		    .fas,
+		    .cc-icon {
+			    color: @color-blue;
+			    font-size: 24px;
+			    vertical-align: middle;
+			    margin-right: 10px;
+		    }
+	    }
+    }
+	}
+}

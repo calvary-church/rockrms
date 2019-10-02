@@ -1,0 +1,126 @@
+﻿<div class="sermon-grid" id="masterlist">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				
+				<div class="block-grid block-grid-xs-1 block-grid-sm-2 block-grid-md-3">
+			
+			{% for item in Items %}
+			
+			{% assign seriesImageGuid = item | Attribute:'SeriesImage','RawValue' %}
+			{% assign startDate = item.StartDateTime | Date:'MMMM' %}
+			{% assign endDate = item.ExpireDateTime | Date:'MMMM' %}
+			{% assign startDateYear = item.StartDateTime | Date:'yyyy' %}
+			{% assign endDateYear = item.ExpireDateTime | Date:'yyyy' %}
+			{% assign customDateRange = item | Attribute:'CustomDateRange' | Trim %}
+
+			{%- assign colPos = forloop.index0 | Modulo:3 | Plus:1 -%}
+
+					<div class='block-grid-item series__item' style="-ms-grid-row:1;-ms-grid-column:{{colPos}};">
+				    <a class="series__link series-opener" href="/messages/{{ item.PrimarySlug }}" data-openseries="series{{ item.Id }}">
+				    <article class="series">
+				    {% if detailImageGuid != '' %}
+						  <img class="series__image img-responsive" src="/GetImage.ashx?Guid={{ seriesImageGuid }}&width=800&height=450&mode=crop" alt="{{ item.Title }}" />
+				    {% endif %}
+				      <div class="series__body">
+				        <h3>{{ item.Title }}</h3>
+				        <p class="series__dates">
+					        {% if customDateRange != "" %}
+					        	{{ customDateRange }}
+									{% elseif item.ExpireDateTime == null  %}
+				            {{ startDate }} {{ startDateYear }}
+								  {% elseif startDate != endDate && startDateYear != endDateYear %}
+				            {{ startDate }}	- {{ endDate }} {{ endDateYear }}
+				          {% else %}
+				            {{ startDate }} {{ startDateYear }}
+				          {% endif %}
+							  </p>
+				      </div>
+				    </article>
+				    </a>
+			
+				  	<div class="series-container" id="series{{ item.Id }}">
+				  		<div class="container">
+				  			<div class="series-detail row">
+				  				<div class="col-sm-12">
+				  					<a class="closer">Close <svg class="cc-icon cc-icon-close"><use xlink:href="#cc-icon-close"></use></svg></a>
+				  					<h2 class="series-detail__title">{{ item.Title }}</h2>
+				  					<div class="series-detail__summary">{{ item.Content }}</div>
+				  					<ul class="series-detail__sermons-list sermon-list">
+					  					{% assign seriesWeeks = item.ChildItems | Sort:'Order' %}
+				  						{% for week in seriesWeeks %}
+				  						{% assign startDate = week.ChildContentChannelItem.StartDateTime | Date:'yyyyMMdd' %}
+				  						{% assign dateNow = 'Now' | Date:'yyyyMMdd' %}
+				  						{% if startDate <= dateNow %}
+				  							<li class="sermon-list__sermon sermon">
+				  							<p class="sermon__date">{{ week.ChildContentChannelItem.Title }} | {{ week.ChildContentChannelItem.StartDateTime | Date:'MMMM d' }}</p>
+				  							<div class="row">
+					  							<div class="col-md-6">
+							  						{% assign firstItem = week.ChildContentChannelItem.ChildItems | First %}
+							  						{% assign messageTitle = firstItem.ChildContentChannelItem.Title %}
+						  							<h3 class="sermon__title">{{ messageTitle }}</h3>
+					  							</div>
+					  							<div class="col-md-6">
+						  							<ul class="sermon-list__messages list-inline">
+							  						{% for message in week.ChildContentChannelItem.ChildItems %}
+							  						{% if message.ChildContentChannelItem.ContentChannelId == 20 %}
+							  							<li><a href="/{{ LinkedPages.DetailPage }}/{{ message.ChildContentChannelItem.PrimarySlug }}">{{ message.ChildContentChannelItem | Attribute:'Campus' }} <svg class="cc-icon cc-icon-caret"><use xlink:href="#cc-icon-caret"></use></svg></a></li>
+							  						{% endif %}
+							  						{% endfor %}
+						  							</ul>
+					  							</div>
+				  							</div>
+				  							</li>
+				  						{% endif %}
+				  						{% endfor %}
+				  					</ul>
+				  				</div>
+				  			</div>
+				  		</div>
+				  	</div>	
+			
+				  </div>
+			
+			{% endfor %}
+			
+				</div>
+			
+				<div class="pagination">
+					<div class="row">
+						<div class="col-sm-10 col-md-8">
+					
+					    {% if Pagination.TotalPages > 1 %}
+					    <div class="margin-t-lg">
+					      {% assign nextPageString = Pagination.NextPage | ToString %}
+					      {% assign prevPageString = Pagination.PreviousPage | ToString %}
+					    
+					      {% if Pagination.PreviousPage == -1 %}
+					      <div class="disabled pull-left">
+					        <i class="fa fa-chevron-left"></i> Previous
+					      </div>
+					      {% else %}
+					      <a class="pull-left" href="{{Pagination.UrlTemplate | Replace:'PageNum', prevPageString}}">
+					        <i class="fa fa-chevron-left"></i> Previous
+					      </a>
+					      {% endif %}
+					    
+					      {% if Pagination.NextPage == -1 %}
+					      <div class="disabled pull-right">
+					        Next <i class="fa fa-chevron-right"></i>
+					      </div>
+					      {% else %}
+					      <a class="pull-right backlink" href="{{Pagination.UrlTemplate | Replace:'PageNum', nextPageString}}">
+					        Next <i class="fa fa-chevron-right"></i>
+					      </a>
+					      {% endif %}
+					    </div>
+					    {% endif %}
+					
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>

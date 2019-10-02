@@ -1,0 +1,25 @@
+.header {
+	top:0;
+	left: 50%;
+  transform: translateX(-50%);
+  position: fixed;
+  z-index: 10;
+}
+#search-layer {
+	display: none;
+	position: fixed;
+	background-color: @brand-primary;
+	padding: 100px;
+	z-index: 100;
+	top:0;
+	left:0;
+	width: 100%;
+	bottom: 50%;
+	.vc {
+		position: relative;
+		.vc();
+	}
+	&.active {
+		display: block;
+	}
+}

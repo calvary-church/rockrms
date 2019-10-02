@@ -1,0 +1,24 @@
+{% assign item = Items | First %}
+{% if item  %}
+  {% assign ParentContentChannelId = item.ParentItems[0].ContentChannelItemId %}
+  {% assign SeriesTitle = item.ParentItems[0].ContentChannelItem.Title %}
+  {% assign SermonDate = item.StartDateTime | Date:'MMM d, yyyy' %}
+  {% assign SecondSermonDate = SecondItem.StartDateTime | Date:'MMM d, yyyy'  %}
+  {% assign VimeoId = item | Attribute: 'VimeoId' %}
+    <div class="row sermon-block">
+        <div class="series__title">{{ SeriesTitle }}</div>
+        <div class="sermon__title">{{ item.Title }}</div>
+        <div class="sermon__date">{{ SermonDate }}</div>
+        <div class="video-block">
+        {% if VimeoId != "" %}
+          <div class="video">
+   					<div class="embed-responsive embed-responsive-16by9">
+     					<iframe src="https://player.vimeo.com/video/{{ VimeoId }}?title=0&byline=0&portrait=0" width="640" height="360" js-player-fullscreen no-playbar with-sticky-custom-logo player-sm player-cardsCorner webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            </div>
+   					<div class="sermon__speaker">{{ item | Attribute:'Speaker' }}</div>
+          </div><!-- end .video -->
+        {% endif %}
+        </div><!-- end .video-block -->
+        <div class="row text-center"><a href="/worship/sermons" class="btn btn--default">All Sermons</a></div>
+    </div>
+{% endif %}

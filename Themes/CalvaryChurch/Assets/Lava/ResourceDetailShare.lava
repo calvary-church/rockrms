@@ -1,0 +1,11 @@
+    <div class="blog-item__share"> 
+      <h3>Share this Resource</h3>
+      <div class="addthis_toolbox">
+        <ul class="custom_images">
+          <li><a class="addthis_button_facebook"><span class="fab fa-facebook"></span></a></li>
+          <li><a class="addthis_button_twitter"><span class="fab fa-twitter"></span></a></li>
+          <li><a class="addthis_button_email"><svg class="cc-icon cc-icon-email"><use xlink:href="#cc-icon-email"></use></svg></a></li>
+          <li><a class="addthis_button_more"><svg class="cc-icon cc-icon-plus"><use xlink:href="#cc-icon-plus"></use></svg></a></li> 
+        </ul>
+      </div>
+    </div>

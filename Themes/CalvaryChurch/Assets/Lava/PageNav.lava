@@ -1,0 +1,66 @@
+<div id="navbar-primary">
+<button aria-label="Close Navigation Menu" class="navbar-close" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+    <svg aria-hidden="true" class="cc-icon cc-icon-close"><use xlink:href="#cc-icon-close"></use></svg>
+</button>
+{% if Page.DisplayChildPages == 'true' and Page.Pages != empty %}
+  <ul class="nav navbar-nav">
+	{% for childPage in Page.Pages %}
+		{% assign hasGrandchildren = "" %}
+		{% if childPage.DisplayChildPages == 'true' and childPage.Pages != empty %}
+			{% for grandChildPage in childPage.Pages %}
+					{% if grandChildPage.DisplayChildPages == 'true' and grandChildPage.Pages != empty %}
+						{% assign hasGrandchildren = "has-grandchildren" %}
+					{% endif %}
+			{% endfor %}
+		{% endif %}
+      <li id="menu_{{ childPage.Title | ToCssClass }}" class="{% if childPage.Current == 'true' %}active{% endif%}{% if childPage.DisplayChildPages == 'true' and childPage.Pages != empty %} dropdown{% endif%} {{hasGrandchildren}}">
+			{% if childPage.DisplayChildPages == 'true' and childPage.Pages != empty %}
+				<a href="#" class="dropdown-trigger" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ childPage.Title }} <span class="caret"></span><svg class="cc-icon cc-icon-plus"><use xlink:href="#cc-icon-plus"></use></svg><svg class="cc-icon cc-icon-minus"><use xlink:href="#cc-icon-minus"></use></svg></a>
+			{% else %}
+				<a href="{{ childPage.Url }}">{{ childPage.Title }}</a>
+			{% endif %}
+			{% if childPage.DisplayChildPages == 'true' and childPage.Pages != empty %}
+		    <ul class="dropdown-menu">
+				{% for grandChildPage in childPage.Pages %}
+          <li class="{% if grandChildPage.Current == 'true' %}active{% endif%}{% if grandChildPage.DisplayChildPages == 'true' and grandChildPage.Pages != empty %} has-children{% endif%}" id="menu_{{ childPage.Title | ToCssClass }}_{{ grandChildPage.Title | ToCssClass }}">
+						{% if grandChildPage.DisplayChildPages == 'true' and grandChildPage.Pages != empty %}
+							<a href="#">{{ grandChildPage.Title }}</a>
+					    <ul class="grandchild-menu">
+							{% for greatGrandChildPage in grandChildPage.Pages %}
+			          <li{% if greatGrandChildPage.Current == 'true' %} class="active"{% endif%} id="menu_{{ grandChildPage.Title | ToCssClass }}_{{ greatGrandChildPage.Title | ToCssClass }}">
+									<a href="{{ greatGrandChildPage.Url }}">{{ greatGrandChildPage.Title }}</a>
+			          </li>
+			        {% endfor %}
+					    </ul>
+					  {% else %}
+  						<a href="{{ grandChildPage.Url }}">{{ grandChildPage.Title }}</a>
+						{% endif %}
+          </li>
+        {% endfor %}
+		    </ul>
+			{% endif %}
+    </li>
+  {% endfor %}
+	</ul>
+{% endif %}
+{% if IncludePageList && IncludePageList != empty %}
+  <ul id="quick-links" class="list-inline">
+    {% for includePage in IncludePageList %}
+			{% assign parts = includePage | PropertyToKeyValue %}
+			<li id="ipl_{{ parts.Key | ToCssClass }}">
+				<a href="{{ parts.Value }}">{{ parts.Key }}<svg class="cc-icon cc-icon-{{ parts.Key | ToCssClass }}"><use xlink:href="#cc-icon-{{ parts.Key | ToCssClass }}"></use></svg></a>
+      </li>
+    {% endfor %}
+			<li id="ipl_account">
+			{% if CurrentPerson %}
+				<a href="/account">Account<svg class="cc-icon cc-icon-person"><use xlink:href="#cc-icon-person"></use></svg></a>
+			{% else %}
+				<a href="/account">Login<svg class="cc-icon cc-icon-person"><use xlink:href="#cc-icon-person"></use></svg></a>
+			{% endif %}
+      </li>
+			<li id="ipl_search">
+				<a href="/search">Search<svg class="cc-icon cc-icon-search"><use xlink:href="#cc-icon-search"></use></svg></a>
+      </li>
+  </ul>
+{% endif %}
+</div>

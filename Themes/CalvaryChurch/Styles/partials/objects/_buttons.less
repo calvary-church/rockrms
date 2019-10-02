@@ -1,0 +1,195 @@
+.button{ //every button needs this class
+  .font(16,bold);
+  text-transform: uppercase;
+  color: inherit;
+  padding: 8px 30px;
+  margin: 10px 0;
+  border: 2px solid #000;
+  border-radius: 50px;
+  transition: all .5s ease-in-out;
+  display: inline-block;
+  line-height: 1.5em;
+  text-decoration: none;
+  letter-spacing: 0.95px;
+  &:hover, &:active, &:focus {
+    text-decoration: none;
+  }
+  & + .button {
+    margin: 12px 12px 6px;
+
+    @media (min-width: @screen-sm) {
+      margin: 0 0 0 10px;
+    }
+    &--xlarge{
+      margin: 12px 0;
+      @media (min-width: @screen-sm) {
+        margin: 0 0 0 20px;
+      }
+    }
+  }
+  &--default{
+    color: @brand-primary;
+    border-color: @brand-primary;
+    &:hover, &:active, &:focus {
+      background-color: @brand-primary;
+      color: @white;
+    }
+    &.button--solid {
+      color: @white;
+      background-color: @brand-primary;
+      &:hover, &:active, &:focus {
+	      background-color: transparent;
+				color: @brand-primary;
+      }
+    }
+  }
+  &--primary{
+    color: @brand-primary;
+    border-color: @brand-primary;
+    &:hover, &:active, &:focus {
+      background-color: @brand-primary;
+      color: @white;
+    }
+    &.button--solid {
+      color: @white;
+      background-color: @brand-primary;
+      &:hover, &:active, &:focus {
+				color: @brand-primary;
+	      background-color: transparent;
+      }
+    }
+  }
+  &--secondary{
+    color: @brand-secondary;
+    border-color: @brand-secondary;
+    &:hover, &:active, &:focus {
+      background-color: @brand-secondary;
+      color: @white;
+    }
+    &.button--solid {
+      color: @white;
+      background-color: @brand-secondary;
+      &:hover, &:active, &:focus {
+				color: @brand-secondary;
+        background-color: transparent;
+      }
+    }
+  }
+  &--white{
+    color: @white;
+    border-color: @white;
+    &:hover, &:active, &:focus {
+      background-color: @brand-primary;
+      color: @white;
+    }
+  }
+  &--tan{
+    color: @color-gray-light;
+    border-color: @color-gray-light;
+    &:hover, &:active, &:focus {
+      background-color: @color-gray-light;
+      color: @white;
+    }
+  }
+  &--light{
+    color: @white;
+    border-color: @white;
+    &:hover, &:active, &:focus {
+      background-color: @brand-primary;
+      color: @white;
+    }
+  }
+  &--outline{
+    background-color: transparent;
+    &:hover, &:active, &:focus {
+      color: @brand-primary;
+      background-color: @white;
+    }
+  }
+
+  &--medium{
+    padding: 8px 30px;
+  }
+	&--large{
+		font-size: 20px;
+		font-weight: bold;
+		padding: 10px 30px;
+		@media (min-width: @screen-sm) {
+			min-width: 130px;
+			padding: 10px 30px;
+		}
+		text-align: center;
+		.cc-icon {
+		  font-size: 1.25em;
+		}
+	}
+  &--xlarge{
+		font-size: 24px;
+		font-weight: bold;
+    	padding: 18px 60px;
+    .cc-icon {
+      font-size: 1.3em;
+    }
+  }
+  &--arrow{
+    padding: 4px 14px 4px 24px;
+  }
+  &--disabled{
+    color: @color-gray-light;
+    border-color: @color-gray-light;
+    &:hover, &:active, &:focus {
+      background-color: transparent;
+      color: @color-gray-light;
+    }
+  }
+  .cc-icon {
+	  font-size: 1.2em;
+	  height: 1em;
+	  width: 1em;
+	  color: inherit;
+	  vertical-align: text-top;
+	  &--point-right {
+		  transform: rotate(-90deg);
+	  }
+	  &--point-left {
+		  transform: rotate(90deg);
+	  }
+  }     
+}
+
+.btn-group {
+  .btn {
+	  font-size: 16px;
+	  color: @text-color;
+	  margin: 0 -1px;
+	  text-transform: uppercase;
+		padding: 13px;
+    box-shadow: none;
+    line-height: 1;
+	  &.active {
+		  background-color: @brand-primary;
+		  color: @white;
+	  }
+  }
+}
+
+.main{
+  .modal-content.rock-modal .modal-body, .modal-footer, .button-bar{
+    .btn{
+      .font(16,600);
+      text-transform:  inherit;
+      color: inherit;
+      padding:  6px 12px;
+      margin:  auto;
+      border:  none;
+      border-radius:  0;
+      transition: all .5s ease-in-out;
+      &.btn-primary{
+        color: @white;
+      }
+      &.btn-secondary{
+        color: @brand-primary;
+      }
+    }
+  }
+}

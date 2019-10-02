@@ -1,0 +1,94 @@
+.container {
+  @media (min-width: @screen-xl-min) {
+    width: 1360px;
+  }
+}
+
+/*** Imported into the bottom of theme.less ***/
+html {
+  font-family: sans-serif; // 1
+  -ms-text-size-adjust: 100%; // 2
+  -webkit-text-size-adjust: 100%; // 2
+  font-size: 16px;
+  @media (min-width: @screen-sm) {
+ 	 	font-size: 19px;
+  }
+}
+
+h1, .h1 {
+	.font-phone-heading-1-white();
+	margin:0;
+	@media (min-width: @screen-sm) {
+		.font-desktop-heading-1-white();
+	}
+}
+h2, .h2 { 
+	.font-phone-heading-2();
+	margin-bottom: 0.75em;
+	@media (min-width: @screen-sm) {
+		.font-desktop-heading-2();
+	}
+	&:first-child {
+		margin-top:0;
+	}
+}
+h3, .h3 { 
+	.font-phone-heading-3();
+	margin-bottom: 0.75em;
+	@media (min-width: @screen-sm) {
+		.font-desktop-heading-3();
+	}
+	&:first-child {
+		margin-top:0;
+	}
+}
+h4, .h4 { 
+	.font-phone-heading-4();
+	margin-bottom: 0.75em;
+	@media (min-width: @screen-sm) {
+		.font-desktop-heading-4();
+	}
+	&:first-child {
+		margin-top:0;
+	}
+}
+h5, .h5 { 
+	.font(20, 500);
+}
+h6, .h6 { 
+	.font(18);
+	line-height: 1.5;
+}
+h5, .h5, h6, .h6 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: @gray-darker;
+	&:first-child {
+		margin-top:0;
+	}
+}
+
+p {
+	margin: 0 0 1em;
+	&:last-child {
+    margin-bottom: 0;
+	}
+}
+
+.checkbox-inline:first-child, .radio-inline:first-child {
+	padding-left:20px !important;
+}
+
+td.calendar-selected {
+  padding: 5px;
+}
+
+.pagination {
+	width: 100%;
+}
+/*** Custom imports ***/
+//@import "../Assets/Icons/style.less";
+
+@import "partials/components/_components.less";
+@import "partials/elements/_elements.less";
+@import "partials/objects/_objects.less";

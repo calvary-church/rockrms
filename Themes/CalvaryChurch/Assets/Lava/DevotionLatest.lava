@@ -1,0 +1,36 @@
+{% for item in Items %}
+{% assign latestBlog = Items | First %}
+{% assign Author = item | Attribute:'Author' %}  
+    {% if forloop.first %} 
+        <div class="row latest blog-item">
+    {% else %}
+        <div class="row blog-item">
+    {% endif %}
+             {% if forloop.first %} 
+                <div class="col-md-5 blog-item__info">
+                <h6>Latest Devotion</h6>
+            {% else %}
+                <div class="col-md-8 blog-item__info">
+
+            {% endif %}
+            <div class="blog-item__title">{{ item.Title }}</div>
+            <div class="blog-item__date">{{ item.StartDateTime | Date: 'MMM d, yyyy ' }} | {{ Author }}</div>
+            {% if forloop.first %} 
+            <a href="{{ LinkedPages.DetailPage }}?Item={{ item.Id }}" class="btn btn--secondary --arrow">Read <i class="icon icon-caret --point-right"></i></a>
+            {% endif %}
+          </div>
+          {% if forloop.first %} 
+          <div class="col-md-7 blog-item__content">
+          {% else %}
+          <div class="col-md-4 blog-item__content text-right">
+          {% endif %}
+          <div class="content-wrapper">
+               {% if forloop.first %} 
+                    {{ item.Content | TruncateWords:75 ,'...' }}
+                {% else %}
+                    <a href="{{ LinkedPages.DetailPage }}?Item={{ item.Id }}" class="btn btn--secondary --arrow">Read <i class="icon icon-caret --point-right"></i></a>
+                {% endif %}
+            </div>
+          </div>
+        </div>
+{% endfor %}

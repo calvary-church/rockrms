@@ -1,0 +1,11 @@
+{% for item in Items %}
+{% assign Author = item | Attribute:'Author' %} 
+  <div class="card__category">Devotions</div>
+  <div class="card__title">{{ item.Title }}</div>
+  <ul class="card__meta">
+    <li class="card__date">{{ item.StartDateTime | Date: 'MMM d, yyyy ' }} | {{ Author }}</li>
+  </ul>
+  <a class="btn btn--primary --medium" href="{{ LinkedPages.DetailPage }}?Item={{ item.Id }}">Read</a>
+  <a class="btn btn--default --medium --tan" href="/resources/weekly-devotions">All Devotions</a>
+
+{% endfor %}

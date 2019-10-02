@@ -1,0 +1,47 @@
+<section id="events" class="events">
+  <div class="block-grid-xs-1 block-grid-sm-3 block-grid-md-3">
+  {% for occurrence in EventItemOccurrences %}
+		{% assign photo = occurrence.EventItem.Photo.Guid %}
+	  {% assign eventWebsiteImage = occurrence.EventItem | Attribute:'WebsiteImage', 'Object' | CloudinaryTransform:'c_fill,g_faces,w_840,h_590,q_auto' %}
+
+	{%- assign colPos = forloop.index0 | Modulo:3 | Plus:1 -%}
+	{%- assign rowPos = forloop.index | DividedBy:3 | Ceiling -%}
+
+	<div class='block-grid-item event' style="-ms-grid-row:{{rowPos}};-ms-grid-column:{{colPos}};">
+    {% if occurrence.EventItem.DetailsUrl != '' %}
+			<a href="{{ occurrence.EventItem.DetailsUrl }}">
+    {% else %}
+			<a href="{{ EventDetailPage }}?EventOccurrenceId={{ occurrence.Id }}">
+		{% endif %}
+		{% if eventWebsiteImage != "" %}
+				<img src="{{ eventWebsiteImage }}" alt="{{ occurrence.EventItem.Name }}" />
+    {% else %}
+				<img src="/GetImage.ashx?Guid={{ photo }}&width=840&height=590&mode=crop" alt="{{ occurrence.EventItem.Name }}" />
+		{% endif %}
+			</a>
+			<div class="event__item">
+				<h3 class="event__title">
+		    {% if occurrence.EventItem.DetailsUrl != '' %}
+		      <a href="{{ occurrence.EventItem.DetailsUrl }}">
+		    {% else %}
+		      <a href="{{ EventDetailPage }}?EventOccurrenceId={{ occurrence.Id }}">
+				{% endif %}
+						{{ occurrence.EventItem.Name }}
+					</a>
+				</h3>
+				<ul class="event__meta">
+				  <li class="event__date">{{ occurrence.Schedule.iCalendarContent | DatesFromICal | First | Date: 'MMM d, yyyy ' }}</li>
+				  <li class="event__time">{{ occurrence.Schedule.iCalendarContent | DatesFromICal | First | Date: 'hh:mm tt ' }}</li>
+				</ul>
+{% comment %}
+    {% if occurrence.EventItem.DetailsUrl != '' %}
+      <a class="btn btn--secondary --medium" href="{{ occurrence.EventItem.DetailsUrl }}">Details</a>
+    {% else %}
+      <a class="btn btn--secondary --medium" href="{{ EventDetailPage }}?EventOccurrenceId={{ occurrence.Id }}">Details</a>          
+    {% endif %}
+{% endcomment %}
+      </div>
+    </div>
+  {% endfor %}
+	</div>
+</section><!-- end .events -->

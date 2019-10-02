@@ -1,0 +1,16 @@
+<div class="panel panel-default list-as-blocks clearfix">
+    <div class="panel-body">
+        <ul>
+            {% for item in Items %}
+                <li>
+                    <a href="{{- InternalApplicationRoot -}}{{- LinkedPages.DetailPage -}}?Item={{- item.Id -}}" title="{{- item.Summary -}}">
+                        <i class="{{- item.IconCSSClass -}}"></i>
+                        <h3>
+                            {{ item.Title }}
+                        </h3>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

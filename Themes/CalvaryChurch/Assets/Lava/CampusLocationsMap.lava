@@ -1,0 +1,221 @@
+﻿<div id="campus-locations">
+	<div class="content">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-5">
+					<div class="drop-shadow">
+						<div class="mission-statement"><span>One Church.</span> <span>Multiple Locations.</span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="campusmap"></div>
+	<div class="campuslist">
+		<div class="panel-group accordion" id="accordion__campus-list" role="tablist" aria-multiselectable="true">
+{%- sql -%}
+SELECT
+    c.IsActive,
+    c.Name,
+    c.ShortCode,
+    c.ServiceTimes,
+    c.Url,
+    c.[Order],
+    l.Street1,
+    l.City,
+    l.State,
+    l.PostalCode
+FROM [Campus] c
+LEFT OUTER JOIN [Location] l
+ON c.LocationId = l.Id
+WHERE c.IsActive = 'true'
+ORDER BY c.[Order]
+{%- endsql -%}
+	{%- for campus in results -%}
+    {%- assign isActive = campus.IsActive -%}
+    	{%- if isActive -%}
+	    {%- assign serviceDay = "" -%}
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading{{campus.ShortCode}}">
+          <h4 class="panel-title">
+            <a role="button" data-toggle="collapse" data-parent="#accordion__campus-list" href="#collapse{{campus.ShortCode}}" aria-controls="collapse{{campus.ShortCode}}">{{ campus.Name }}</a>
+          </h4>
+        </div>
+        <div id="collapse{{campus.ShortCode}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{campus.ShortCode}}">
+          <div class="panel-body">
+	          {% assign serviceTimes = campus.ServiceTimes | Split:'|' %}
+						{% for serviceTime in serviceTimes %}{% assign serviceDayTime = serviceTime | Split:'^' %}{% assign separator='' %}{% if forloop.length > 1 %}{% if forloop.last %}{% assign separator=' and '%}{% elseif forloop.first != true and serviceDayTime[0] == serviceDay %}{% assign separator=', '%}{% endif %}{% endif %}{% if serviceDayTime[0] != serviceDay %}<p>{{ serviceDayTime[0] | Pluralize}} at {% assign serviceDay = serviceDayTime[0] %}{% endif %}{{ separator }}{{ serviceDayTime[1] }}{% endfor %}
+						{% assign campusLocation = campus.Street1 | Trim %}
+						{% if campusLocation != "" %}
+						<p class="location-link"><svg class="cc-icon cc-icon-location"><use xlink:href="#cc-icon-location"></use></svg><a target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;destination={{campus.Street1}}+{{campus.City}}+{{campus.State}}+{{campus.PostalCode}}">Map & Directions</a></p>
+						{% else %}
+						<p class="location-link"><i class="fas fa-link"></i><a href="{{campus.Url}}">More Info</a></p>
+						{% endif %}
+          </div>
+        </div>
+      </div>
+			{%- endif -%}
+		{%- endfor -%}		
+		</div>
+	</div>		
+</div>
+
+<link rel="stylesheet" href="/Themes/CalvaryChurch/bower_components/snazzy-info-window/dist/snazzy-info-window.min.css">
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ 'Global' | Attribute:'GoogleAPIKey' }}"></script>
+<script src="/Themes/CalvaryChurch/bower_components/snazzy-info-window/dist/snazzy-info-window.min.js"></script>
+
+<script type="text/javascript">
+    // https://github.com/atmist/snazzy-info-window
+    // When the window has finished loading create our google map below
+    google.maps.event.addDomListener(window, 'load', init);
+
+    function init() {
+        // Basic options for a simple Google Map
+        // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+
+				//create empty LatLngBounds object
+				var bounds = new google.maps.LatLngBounds();
+				
+        var opts = {
+            // How zoomed in you want the map to start at (always required)
+            zoom: 11,
+
+            // The latitude and longitude to center the map (always required)
+            center: new google.maps.LatLng(38.782723, -90.88107), // St. Louis
+
+            // How you would like to style the map. 
+            // This is where you would paste any style found on Snazzy Maps.
+            
+            /*** Clean Gray: https://snazzymaps.com/style/102/clean-grey ***/
+            styles: [{"featureType":"administrative","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"administrative.country","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"administrative.province","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"visibility":"on"},{"color":"#e3e3e3"}]},{"featureType":"landscape.natural","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"color":"#cccccc"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"visibility":"off"}]},{"featureType":"transit.line","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"transit.station.airport","elementType":"geometry","stylers":[{"visibility":"off"}]},{"featureType":"transit.station.airport","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#FFFFFF"}]},{"featureType":"water","elementType":"labels","stylers":[{"visibility":"off"}]}]
+            
+        };
+
+				opts.clickableIcons = false;
+				opts.disableDoubleClickZoom = false;
+				opts.draggable = true;
+				opts.keyboardShortcuts = true;
+				opts.scrollwheel = false;
+
+				var setControlOptions = function(key, enabled, position, style, mapTypeIds){
+					opts[key + 'Control'] = enabled;
+					opts[key + 'ControlOptions'] = {
+						position: google.maps.ControlPosition[position],
+						style: google.maps.MapTypeControlStyle[style],
+						mapTypeIds: mapTypeIds
+					};
+				};
+					
+				setControlOptions('fullscreen',false,'DEFAULT','',null);
+				setControlOptions('mapType',true,'TOP_RIGHT','DEFAULT',null);
+				setControlOptions('rotate',false,'DEFAULT','',null);
+				setControlOptions('scale',false,'','',null);
+				setControlOptions('streetView',false,'DEFAULT','',null);
+				setControlOptions('zoom',true,'DEFAULT','',null);
+				
+        // Get the HTML DOM element that will contain your map 
+        // We are using a div with id="map" seen below in the <body>
+        var mapElement = document.getElementById('campusmap');
+
+        // Create the Google Map using our element and options defined above
+        var map = new google.maps.Map(mapElement, opts);
+
+    {%- for campus in Campuses -%}
+      {%- assign isActive = campus.IsActive -%}
+      {%- assign hasLocation = campus.Location.Latitude -%}
+    	{%- if isActive and hasLocation -%}
+	    {%- assign serviceDay = "" -%}
+	    
+        // Let's add campus markers
+				(function(){
+					var markerOptions = {
+						map: map,
+						position: {
+							lat: {{campus.Location.Latitude}},
+							lng: {{campus.Location.Longitude}},
+						}
+					};
+					
+					markerOptions.icon = {
+						url: "{{'Global' | Attribute:'PublicApplicationRoot'}}Themes/CalvaryChurch/Assets/Images/location_blue.svg",
+						scaledSize: new google.maps.Size(
+							40,
+							40),
+						size: new google.maps.Size(
+							40,
+							40),
+						anchor: new google.maps.Point(
+							40,
+							40)
+					};
+					markerOptions.options = {
+						optimized: true,
+					};
+					
+					var marker = new google.maps.Marker(markerOptions);
+					
+					var infoWindow = new SnazzyInfoWindow({
+						marker: marker,
+						wrapperClass: 'ql-snow',
+						placement: 'bottom',
+						backgroundColor: '#fff',
+						fontColor: '#000',
+						content: '<div class="infowindow"><h4 class="panel-title"><a role="button" aria-expanded="false" aria-controls="collapse{{campus.ShortCode}}" class="collapsed">{{ campus.Name }}<svg class="cc-icon cc-icon-plus"><use xlink:href="#cc-icon-plus"></use></svg><svg class="cc-icon cc-icon-minus"><use xlink:href="#cc-icon-minus"></use></svg></a></h4><div id="location{{campus.ShortCode}}" class="collapse">{% for serviceTime in campus.ServiceTimes %}{% assign separator='' %}{% if forloop.length > 1 %}{% if forloop.last %}{% assign separator=" and "%}{% elseif forloop.first != true and serviceTime.Day == serviceDay %}{% assign separator=", "%}{% endif %}{% endif %}{% if serviceTime.Day != serviceDay %}<p>{{ serviceTime.Day | Pluralize}} at {% assign serviceDay = serviceTime.Day %}{% endif %}{{ separator }}{{ serviceTime.Time }}{% endfor %}<p class="location-link"><svg class="cc-icon cc-icon-location"><use xlink:href="#cc-icon-location"></use></svg><a target="_blank" class="" href="https://www.google.com/maps/dir/?api=1&amp;destination={{campus.Location.Street1}}+{{campus.Location.City}}+{{campus.Location.State}}+{{campus.Location.PostalCode}}">Map & Directions</a></p></div></div>',
+						maxWidth: undefined,
+						maxHeight: undefined,
+						padding: "20px",
+						borderRadius: "0",
+						offset: {
+							top: "10px",
+							left: "-20px",
+							},
+						border: false,
+						pointer: "15px",
+						shadow: {"h":"0px","v":"2px","blur":"3px","spread":"2px","opacity":0.16,"color":"#000000"},
+						closeOnMapClick: false,
+						closeWhenOthersOpen: false
+					});
+
+				  //extend the bounds to include each marker's position
+				  bounds.extend(marker.position);
+					
+					marker.addListener('click', function() {
+	          infoWindow.open(map, marker);
+	        });
+					marker.addListener('mouseover', function() {
+	          infoWindow.open(map, marker);
+	        });
+
+          infoWindow.open(map, marker); //display on load
+          
+				})();
+
+		{%- endif -%}
+	{%- endfor -%}
+
+		//now fit the map to the newly inclusive bounds
+		map.fitBounds(bounds);
+		//(optional) restore the zoom level after the map is done scaling
+		var listener = google.maps.event.addListener(map, "idle", function () {
+	    map.setZoom(11);
+	    var windowWidth = $(window).width();
+
+	    if (windowWidth >= 768) {
+	      //var panRight = windowWidth * -0.18;
+	      map.panBy(0,80);        
+	    }
+
+			$('.infowindow').each(function(){
+				var opener = $(this).find('.panel-title a');
+				var content = $(this).find('.collapse');
+				$(opener).click(function(e){
+					e.preventDefault();
+					$(content).slideToggle().toggleClass('in');
+					$(opener).toggleClass('collapsed open');				              
+				});
+			});
+	    google.maps.event.removeListener(listener);
+		});
+
+    }
+</script>

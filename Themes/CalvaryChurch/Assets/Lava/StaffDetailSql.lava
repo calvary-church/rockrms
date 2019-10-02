@@ -1,0 +1,70 @@
+{% assign staffMemberName = PageParameter.memberName | Split:'-' %}
+
+{% sql %}
+	SELECT TOP 1
+		gm.GroupId,
+		p.Id as PersonId,
+		p.NickName, 
+		p.FirstName, 
+		p.LastName,
+		p.Email
+  FROM [Person] p 
+  LEFT OUTER JOIN [GroupMember] gm ON p.Id = gm.PersonId
+  WHERE
+		gm.GroupId = '{{PageParameter.groupId}}'
+		AND p.FirstName = '{{staffMemberName[0]}}'
+		AND p.LastName = '{{staffMemberName[1]}}'
+{% endsql %}
+	
+{% for item in results %}
+	
+	{% assign personId = item.PersonId %}
+	{% assign groupId = item.GroupId %}
+	{% assign nickName = item.NickName %}
+	{% assign firstName = item.FirstName %}
+	{% assign lastName = item.LastName %}
+	{% assign email = item.Email %}
+	{% assign churchPhone = 'Global' | Attribute:'OrganizationPhone' %}
+	{% assign extension = '' %}
+	{% person id:'{{personId}}' %}
+		{% for phoneNumber in person.PhoneNumbers %}
+			{%comment%} /*** Internal Extension ***/ {%endcomment%}
+			{% if phoneNumber.NumberTypeValueId == '1104' %}	{% assign extension = phoneNumber.Number %}{% endif %}
+		{% endfor %}
+	{% endperson %}
+	
+	{% groupmember where:'GroupId == {{groupId}} && PersonId == {{personId}}' %}
+	
+		{% for item in groupmemberItems %}
+		
+		{% assign title = item | Attribute:'JobTitle' %}
+		{% assign photo = item | Attribute:'StaffPhoto','Object' | CloudinaryTransform:'c_fill,g_face,w_400,h_400,q_auto' %}
+		{% assign bio = item | Attribute:'StaffBio' %}
+			
+		<div class="staff-member">
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2 col-md-offset-2 col-md-4">
+					<div class="staff__photo staff__photo--large"><img src="{{ photo }}" alt="{{ firstName }} {{ lastName }}" /></div>
+				</div>
+				<div class="col-sm-8 col-sm-offset-2 col-md-offset-0 col-md-4">
+					<div class="staff__name">{% if nickName != "" %}{{ nickName }}{% else %}{{ firstName }}{% endif %} {{ lastName }}</div>
+					<div class="staff__title">{{ title }}</div>
+					<div class="staff__bio">{{ bio }}</div>
+					<ul class="staff__meta">
+						{% if email != '' %}<li class="staff__email"><svg class="cc-icon cc-icon-email"><use xlink:href="#cc-icon-email"></use></svg><a class="staff__meta-link" href="mailto:{{ email }}" title="email">{{ email }}</a></li>{% endif %}
+							{% if extension != '' %}<li class="staff__phone"><svg class="cc-icon cc-icon-phone"><use xlink:href="#cc-icon-phone"></use></svg><a class="staff__meta-link" href="tel:{{ churchPhone }},{{ extension }}" title="call">{{ churchPhone }} {% if extension != '' %}x{{ extension }}{% endif %}</a></li>{% endif %}
+					</ul>
+				</div>              	 
+			</div><!-- end .row -->
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2 col-md-offset-6 col-md-4">
+					<a href="/staff" class="button button--primary">Back to Team</a>
+				</div>
+			</div>
+		</div>	
+	
+		{% endfor %}
+		
+	{% endgroupmember %}
+	
+{% endfor %}

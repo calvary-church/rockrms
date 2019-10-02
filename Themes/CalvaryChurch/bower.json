@@ -1,0 +1,9 @@
+{
+  "name": "calvary-church",
+  "authors": [
+    "Fishhook <info@fishhook.us> (http://fishhook.us)"
+  ],
+  "dependencies": {
+    "select2": "^4.0.5"
+  }
+}
