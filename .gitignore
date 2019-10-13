@@ -1,1 +1,70 @@
+# ignore MacOS DS Store files
 .DS_Store
+# ignore Content directory (contents not appropriate to share)
+Content/
+# include 404 (asp)
+!Http404Error.aspx
+# include 404 (c#)
+!Http404Error.aspx.cs
+# ignore App_Browsers directory
+App_Browsers/
+# ignore App_Code directory
+App_Code/
+# ignore App_Data directory
+App_Data/
+# ignore Assets directory
+Assets/
+# ignore Bin directory
+Bin/
+# ignore Blocks directory
+Blocks/
+# ignore Scripts direcotry
+Scripts/
+# ignore SqlServerTypes directory
+SqlServerTypes/
+# ignore Styles directory (automatically built by RockRMS system)
+Styles/
+# ignore webhooks directory (automatically built by RockRMS system)
+Webhooks/
+# ignore content directly in the root directory
+/Default.aspx
+/FileUploader.ashx
+/GatewayStep2Return.aspx
+/GatewayStep2Return.aspx.cs
+/GetAsset.ashx
+/GetBackgroundCheck.ashx
+/GetChannelFeed.ashx
+/GetCommunication.ashx
+/GetEventCalendarFeed.ashx
+/GetFile.ashx
+/GetImage.ashx
+/GetPersonGroupScheduleFeed.ashx
+/Global.asax
+/ImageUploader.ashx
+/KeepAlive.aspx
+/KeepAlive.aspx.cs
+/license.aspx
+/license.aspx.cs
+/NMIGatewayStep2.html
+/packages.config
+/Readme.txt
+/Settings.StyleCop
+/web.config
+# ignore Rock Web Conenction Strings file as it contains sensitive DB connection info
+web.ConnectionStrings.config
+# ignore system (stock/out of box) themes
+Themes/CheckinAdventureKids
+Themes/CheckinBlueCrystal
+Themes/CheckinPark
+Themes/DashboardStark
+Themes/Flat
+Themes/KioskStark
+Themes/LandingPage
+Themes/Rock
+Themes/RockOriginal
+Themes/Stark
+Themes/!*
+# ignore all plugin binaries (specific plugins will be explicitly stated elsewhere
+Plugins/*
+# include Calvary specific plugins
+Plugins/!us_fishhook/
