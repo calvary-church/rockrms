@@ -63,8 +63,11 @@ Themes/LandingPage
 Themes/Rock
 Themes/RockOriginal
 Themes/Stark
-Themes/!*
-# ignore all plugin binaries (specific plugins will be explicitly stated elsewhere
+# include the Calvary Church theme
+!Themes/CalvaryChurch/
+!Themes/CalvaryChurch/*
+# ignore all plugin files (specific plugins will be explicitly stated)
 Plugins/*
 # include Calvary specific plugins
-Plugins/!us_fishhook/
+!Plugins/us_fishhook/
+!Plugins/us_fishhook/*
