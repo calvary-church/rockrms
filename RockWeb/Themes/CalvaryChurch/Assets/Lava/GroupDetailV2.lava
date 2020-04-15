@@ -79,17 +79,7 @@
 		<p>
 			<a href="https://meet.jit.si/{{ Group.Guid | Remove:'-' | Truncate:18,'' }}" target="_blank"
 				class="button button--primary">Start/Join (Backup) Jitsi Meet (<em>{{Group.Name}}</em>)&nbsp;<i
-					class="fa fas fa-external-link"></i></a>{% comment %} ideally this uses a defined value or global attribute,
-			not a hard URL {% endcomment %}<a
-				href="https://groupmeet.calvary.church/{{ Group.Guid | Remove:'-' | Truncate:18,'' }}" target="_blank"
-				class="button button--primary">Start/Join Calvary Virtual Group Meet (<em>{{Group.Name}}</em>)&nbsp;<i
-					class="fa fas fa-external-link"></i></a>{% comment %} ideally this uses a defined value or global attribute,
-			not a hard URL {% endcomment %}
-			<br>
-			<a href="https://groupmeet.calvary.church/{{ Group.Guid | Remove:'-' | Truncate:18,'' }}" target="_blank"
-				class="button button--primary">Start/Join Calvary Virtual Group Meet (<em>{{Group.Name}}</em>)&nbsp;<i
-					class="fa fas fa-external-link"></i></a>{% comment %} ideally this uses a defined value or global attribute,
-			not a hard URL {% endcomment %}
+					class="fa fas fa-external-link"></i></a>
 		</p>
 	</div>
 </div>
@@ -99,8 +89,6 @@
 		<ul>
 			<li><em>coming soon...</em></li>
 		</ul>
-		{% comment %}If you need customized info for different types of groups, use group type attributes so it's set for
-		all groups of that type{% endcomment %}
 	</div>
 </div>
 
