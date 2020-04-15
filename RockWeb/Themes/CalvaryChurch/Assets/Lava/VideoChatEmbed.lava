@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      {% if CurrentPerson %}
+          {% assign groupId = 'Global' | PageParameter:'GroupId' %}
+          {% group id:'{{ groupId }}' %}
+              {% assign inGroup = false %}
+              {% for groupMember in group.Members %}
+                  {% if groupMember.PersonId == CurrentPerson.Id %}
+                      {% assign inGroup = true %}
+                  {% endif %}
+              {% endfor %}
+              {% if inGroup %}
+                  <h3 class="alert alert-info">When done, close this tab/window or <a href="/page/631?GroupId={{groupId}}">click here</a> to return to the Group Toolbox</h3>
+                  <div class="embed-responsive embed-responsive-16by9">
+                    <div class="embed-repsonsive-item">
+                      {[ videochat roomname:'{{ group.Name }}' backgroundcolor:'#0083bb' server:'meet.jit.si' toolbarbuttons:'microphone,camera,desktop,fullscreen,fodeviceselection,hangup,profile,info,chat,recording,livestreaming,sharedvideo,settings,raisehand,videoquality,filmstrip,invite,feedback,stats,shortcuts,tileview,videobackgroundblur,download,help,mute-everyone']}
+                    </div>
+                  </div>
+              {% else %}
+                  <div class="alert alert-warning">You are not a member of the group: {{ group.Name }}. Please contact the leader of this group for access.</div>
+              {% endif %}
+          {% endgroup %}
+      {% else %}
+          <div class="alert alert-info">Please login to access the video chat.</div>
+      {% endif %}
+    </div>
+  </div>
+</div>

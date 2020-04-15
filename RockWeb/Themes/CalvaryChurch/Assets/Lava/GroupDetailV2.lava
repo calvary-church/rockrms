@@ -75,20 +75,45 @@
 {% comment %} this row is for virtual group meeting tools {% endcomment %}
 <div class="row">
 	<div class="col-md-12">
-		<h4>Virtual Group Meeting info:</h4>
-		<p>
-			<a href="https://meet.jit.si/{{ Group.Guid | Remove:'-' | Truncate:18,'' }}" target="_blank"
-				class="button button--primary">Start/Join (Backup) Jitsi Meet (<em>{{Group.Name}}</em>)&nbsp;<i
-					class="fa fas fa-external-link"></i></a>
-		</p>
-	</div>
-</div>
-<div class="row">
-	<div class="col-md-12">
-		<h4>Virtual Group Meeting Tips</h4>
-		<ul>
-			<li><em>coming soon...</em></li>
-		</ul>
+		{[ button text:'Join (Primary) Virtual Group Meeting (<em>{{Group.Name}}</em>)' link:'/page/1086?GroupId={{PageParameter.GroupId}}' class:'button button--primary' target:'_blank' ]}
+		<br />
+		{[ button text:'Join (Backup) Virtual Group Meeting (<em>{{Group.Name}}</em>)' link:'https://meet.jit.si/{{Group.Guid|Remove:'-'|Truncate:18,''}}' class:'button button--secondary' target:'_blank' ]}<br />
+		<strong>OR</strong> use Skype:
+		<ol>
+			<li>Click the button below</li>
+			<li>Select the <em>Create a free meeting</em> button</li>
+			<li>Share the link (URL) with meeting participants</li>
+			<li>Select the <em>Start Call</em> button</li>
+			<li>Select <em>Join as guest</em> button or sign in</li>
+		</ol>
+		{[ button text:'Go to Skype and create a meeting' link:'https://skype.com/en/free-conference-call' class:'button button--outline' target:'_blank']}
+		{[ accordion paneltype:'primary' firstopen:'false' ]}
+			[[ item title:'Virtual Group Technology Tips']]
+				<strong><em>Video chat needs bandwidth. The better your connection to your WiFi router and the internet, the better your bandwidth will be</em></strong>
+				<h5>Jitsi Meet Tips</h5>
+				<ul>
+					<li>Use Google Chrome or Microsoft Edge when on a computer, or use the Jitsi mobile app</li>
+					<li>Jitsi meetings are modeled after in-person gatherings</li>
+					<li>To set a password select the <i class="far fa-info-circle"></i> (info) icon</li>
+					<li>To view the meeting info select the <i class="far fa-info-circle"></i> (info) icon</li>
+					<li>Selecting the <i class="fa fas fa-th-large"></i> Tile View button will show you all participants at once</li>
+					<li>Jitsi Meet <a href="https://jitsi.org/user-faq/" target="_blank">FAQ</a></li>
+					<li>Jitsi Meet <a href="https://jitsi.org/security/" target="_blank">Security & Privacy</a></li>
+				</ul>
+				<h5>Tips when using Skype, Zoom, etc.</h5>
+				<ul>
+					<li>When using a free Zoom account, plan for 30 minutes max meeting time</li>
+					<li>Skype does not require sign in (but encourages it)</li>
+					<li>Do not assume that meetings are completely private</li>
+					<li>If available, enable meeting passwords and use a different password for each meeting</li>
+					<li>Do not allow recurring meetings - create a new meeting for each instance</li>
+					<li>Allow only the meeting host to share screens</li>
+					<li>Control who is participating by enabling the 'waiting room' feature</li>
+					<li>Lock the meeting after it starts</li>
+					<li>Turn off file transfer capabilities</li>
+				</ul>
+    [[ enditem ]]
+		{[ endaccordion ]}
 	</div>
 </div>
 
