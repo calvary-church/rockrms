@@ -72,7 +72,6 @@
 	</div>
 </div>
 
-{% comment %} this row is for virtual group meeting tools {% endcomment %}
 {%- assign roomName = Group.Name | Trim -%}
 {%- capture roomNameFixed -%}{{ roomName }}{{ 'Global' | Attribute:'OrganizationAbbreviation' }}{%- endcapture -%}
 {%- assign roomNameFixed = roomNameFixed | Remove:' ' | Remove:'.' | Remove:'?' | Remove:'!' | Remove:'(' | Remove:')' | Remove:'@' | Remove:'#' | Remove:'$' | Remove:'%' | Remove:'&' | Remove:'-' | Remove:'_' | Remove:'+' | Remove:'=' | Remove:'^' | Remove:'*' | Remove:"'" -%}
@@ -81,12 +80,15 @@
 {%- assign groupMeetPwd = Group.Guid | Remove:'-' | Right:8 | AsInteger | Floor | Right:4 -%}
 {%- assign groupMeetPwdString = groupMeetPwd | Prepend:'#p=' -%}
 {%- capture roomNameUrlStringFixed -%}{{ roomNameFixed }}{{ groupMeetPwdString }}{%- endcapture -%}
+{% comment %} this row is for virtual group meeting tools {% endcomment %}
 <div class="row">
 	<div class="col-md-12">
 		{[ button text:'Join (Primary) Virtual Group Meeting (<em>{{Group.Name}}</em>)' link:'https://meet.jit.si/{{roomNameFixed}}' class:'button button--primary' target:'_blank' ]}
 		<br />
 		<br />
 		{[ button text:'Join (Backup) Virtual Group Meeting (<em>{{Group.Name}}</em>)' link:'https://meet.sangoma.com/{{roomNameUrlStringFixed}}' class:'button button--secondary' target:'_blank' ]}
+		<br />
+		<em>Backup Room has an initial password of <code>{{groupMeetPwd}}</code></em>
 		<br />
 		URL: https://meet.sangoma.com/{{roomNameUrlStringFixed}}
 		<br />
