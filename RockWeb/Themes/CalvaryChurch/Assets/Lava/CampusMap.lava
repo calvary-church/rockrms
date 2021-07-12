@@ -10,7 +10,7 @@
 							<p>{{campus.Location.Street1}}<br />{{campus.Location.City}}, {{campus.Location.State}} {{campus.Location.PostalCode}}</p>
 							<p class="icon-link"><svg class="cc-icon cc-icon-location"><use xlink:href="#cc-icon-location"></use></svg><a target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;destination={{campus.Location.Street1}}+{{campus.Location.City}}+{{campus.Location.State}}+{{campus.Location.PostalCode}}">Directions</a></p>
 							<p class="icon-link"><svg class="cc-icon cc-icon-phone"><use xlink:href="#cc-icon-phone"></use></svg><a href="tel:{{ campus.PhoneNumber }}">{{ campus.PhoneNumber }}</a></p>
-							<p class="icon-link"><svg class="cc-icon cc-icon-email"><use xlink:href="#cc-icon-email"></use></svg><a href="mailto:{{ 'Global' | Attribute:'OrganiztionEmail' }}">{{ 'Global' | Attribute:'OrganiztionEmail' }}</a></p>
+							<p class="icon-link"><svg class="cc-icon cc-icon-email"><use xlink:href="#cc-icon-email"></use></svg><a href="mailto:{{ 'Global' | Attribute:'OrganizationEmail' }}">{{ 'Global' | Attribute:'OrganizationEmail' }}</a></p>
 						</div>
 					</div>
 				</div>		
