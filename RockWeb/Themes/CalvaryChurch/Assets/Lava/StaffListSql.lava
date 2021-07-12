@@ -17,7 +17,7 @@
   LEFT OUTER JOIN [GroupType] gt ON g.GroupTypeId = gt.Id
   LEFT OUTER JOIN [GroupTypeRole] gtr ON gt.Id = gtr.GroupTypeId
   WHERE
-		{{staffGroupId}} and (gm.GroupRoleId = gtr.Id)
+		{{staffGroupId}} and (gm.GroupRoleId = gtr.Id) and gm.IsArchived = '0'
   ORDER BY gm.GroupId, gtr.IsLeader desc, p.LastName
 {%- endsql -%}
 <div class="staff-list">
