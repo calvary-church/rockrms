@@ -173,33 +173,11 @@ nav.navbar {
 	        	display: none;
 	        }
         }
-        .caret {
-	        border: solid 15px transparent;
-					border-top: solid 19px transparent;
-	        border-bottom: solid 19px @color-orange-dark;
-	        position: absolute;
-	        bottom:-8px;
-	        left: 50%;
-          transform: translateX(-50%);
-          display: none;
-        }
-      }
-      &:hover {
-	      @media (min-width: @grid-float-breakpoint) {
-		      ul.dropdown-menu {
-			      display: block;
-		      }
-		    }
       }
       &:hover > a,
 	    &.open > a {
 	      background-color: transparent;
 	      border:none;
-	      .caret {
-		      @media (min-width: @grid-float-breakpoint) {
-			      	display: block;
-			    }
-	      }
 	      @media (min-width: @grid-float-breakpoint) {
 		      color: @color-orange-dark;
 	      }
@@ -209,81 +187,7 @@ nav.navbar {
 		      display: none;
 	      }
 		  }
-    }// li
-    .dropdown-menu{
-      border:none;
-      margin: 0;
-      padding: 15px 20px;
-      width: 100%;
-      border-radius: 0;
-      @media (min-width: @grid-float-breakpoint) {
-	      background:@white;
-	      border-top: 8px solid @color-orange-dark;
-        margin: 0;
-        padding: 25px 10px;
-        min-width: 287px;
-        border-radius: 0;      
-      }
-      li{// level 2
-        margin: 0;
-        padding: 5px 0;
-        @media (min-width: @grid-float-breakpoint) {
-         margin: 0;
-         padding: 8px 20px;       
-        }
-        a{
-          .font(18,600);
-          color: @color-gray-dark;
-          text-transform: inherit;
-          line-height: 1;
-          padding: 0px!important;
-          display: inline-block;
-          border-bottom: 2px solid transparent;
-          &:hover, &:active, &:focus {
-            color: @color-orange-dark;
-            border-color: @color-orange-dark;
-            text-decoration: none;
-          }
-        }
-        &.active a{
-          background-color: transparent;
-        }
-        ul{// level3
-          list-style: none;
-          margin: 10px 0;
-          padding: 0;
-          li{
-            border-bottom: none;
-            background-color: @white;
-            margin: 3px 20px 3px 0;
-            padding: 5px 15px;
-            border-radius: 1%;
-            @media (min-width: @grid-float-breakpoint) {
-              margin: 0;
-              padding: 4px 15px;     
-              background-color: transparent;
-              border-radius: 0; 
-            }
-            
-            a{
-              .font(16,400);
-              text-transform: inherit;
-              line-height: 1;
-              &:hover{
-                border-bottom: none;
-                @media (min-width: @grid-float-breakpoint) {
-                  color: @brand-secondary;
-                  border-bottom: 1px solid transparent;
-                  text-decoration: none;  
-                }
-                
-              }
-            }
-          }
-        }
-      }
-    }//end .dropdown-menu
-  
+    }// li  
   }
   .noheader &,
   .affix & {
@@ -374,7 +278,7 @@ nav.navbar {
     padding: 19px 0;
     margin: 57px 3.869048vw 0 0;
   }
-  li{
+  > li{
     color: @white;
     position: relative;
     padding: 0;
@@ -383,14 +287,14 @@ nav.navbar {
     @media (min-width: @grid-float-breakpoint) {
 	    margin-left:0;
     }
-    a{
+    > a{
 			color: @white;
 			display: block;
 			text-decoration: none;
 			text-align: left;
 			@media (min-width: @grid-float-breakpoint) {
 			  padding: 2px 0 0;
-			  margin: 0 8px;
+			  margin: 0 8px 20px;
 			  position: relative;
 			  text-indent: -999em;
 			  height: 28px;
@@ -430,4 +334,119 @@ nav.navbar {
 			}
     }
   }
+}
+.loginstatus {
+  display: none;
+}
+nav.navbar,
+#quick-links {
+  & > li{
+    &:hover {
+      @media (min-width: @grid-float-breakpoint) {
+	      ul.dropdown-menu {
+		      display: block;
+	      }
+	    }
+    }
+    &.dropdown {
+      &:hover > a,
+      &.open > a {
+        .caret {
+	        @media (min-width: @grid-float-breakpoint) {
+		      	display: block;
+		      }
+        }
+      }
+    }
+    > a {
+      .caret {
+        border: solid 15px transparent;
+				border-top: solid 19px transparent;
+        border-bottom: solid 19px @color-orange-dark;
+        position: absolute;
+        top:22px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: none;
+      }
+    }
+  }
+  .dropdown-menu{
+    border:none;
+    margin: 0;
+    padding: 15px 20px;
+    width: 100%;
+    border-radius: 0;
+    @media (min-width: @grid-float-breakpoint) {
+      background:@white;
+      border-top: 8px solid @color-orange-dark;
+      margin: 0;
+      padding: 25px 10px;
+      min-width: 287px;
+      border-radius: 0;      
+    }
+    li{// level 2
+      margin: 0;
+      padding: 5px 0;
+      @media (min-width: @grid-float-breakpoint) {
+       margin: 0;
+       padding: 8px 20px;       
+      }
+      &.divider {
+        padding: 0;
+        margin: 8px 20px;
+      }
+      a{
+        .font(18,600);
+        color: @color-gray-dark;
+        text-transform: inherit;
+        line-height: 1;
+        padding: 0px!important;
+        display: inline-block;
+        border-bottom: 2px solid transparent;
+        &:hover, &:active, &:focus {
+          color: @color-orange-dark;
+          border-color: @color-orange-dark;
+          text-decoration: none;
+	        background: none;
+        }
+      }
+      &.active a{
+        background-color: transparent;
+      }
+      ul{// level3
+        list-style: none;
+        margin: 10px 0;
+        padding: 0;
+        li{
+          border-bottom: none;
+          background-color: @white;
+          margin: 3px 20px 3px 0;
+          padding: 5px 15px;
+          border-radius: 1%;
+          @media (min-width: @grid-float-breakpoint) {
+            margin: 0;
+            padding: 4px 15px;     
+            background-color: transparent;
+            border-radius: 0; 
+          }
+          
+          a{
+            .font(16,400);
+            text-transform: inherit;
+            line-height: 1;
+            &:hover{
+              border-bottom: none;
+              @media (min-width: @grid-float-breakpoint) {
+                color: @brand-secondary;
+                border-bottom: 1px solid transparent;
+                text-decoration: none;  
+              }
+              
+            }
+          }
+        }
+      }
+    }
+  }//end .dropdown-menu
 }

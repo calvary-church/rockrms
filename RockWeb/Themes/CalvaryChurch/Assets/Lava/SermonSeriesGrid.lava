@@ -2,8 +2,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				
-				<div class="block-grid block-grid-xs-1 block-grid-sm-2 block-grid-md-3">
+        <div class="block-grid block-grid-xs-1 block-grid-sm-2 block-grid-md-3">
 			
 			{% for item in Items %}
 			
@@ -16,7 +15,7 @@
 
 			{%- assign colPos = forloop.index0 | Modulo:3 | Plus:1 -%}
 
-					<div class='block-grid-item series__item' style="-ms-grid-row:1;-ms-grid-column:{{colPos}};">
+				  <div class='block-grid-item series__item' style="-ms-grid-row:1;-ms-grid-column:{{colPos}};">
 				    <a class="series__link series-opener" href="/messages/{{ item.PrimarySlug }}" data-openseries="series{{ item.Id }}">
 				    <article class="series">
 				    {% if detailImageGuid != '' %}
@@ -83,14 +82,21 @@
 			
 			{% endfor %}
 			
-				</div>
-			
+				</div>				
+			</div>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
 				<div class="pagination">
 					<div class="row">
 						<div class="col-sm-10 col-md-8">
 					
 					    {% if Pagination.TotalPages > 1 %}
-					    <div class="margin-t-lg">
+					    <div>
 					      {% assign nextPageString = Pagination.NextPage | ToString %}
 					      {% assign prevPageString = Pagination.PreviousPage | ToString %}
 					    
@@ -119,7 +125,6 @@
 						</div>
 					</div>
 				</div>
-				
 			</div>
 		</div>
 	</div>
